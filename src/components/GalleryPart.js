@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./GalleryPart.module.css";
+import default_Img from "../img/default_Img.jpg";
+
+import { FaCircleUser } from "react-icons/fa6";
+
+const onErrorImg = (e) => {
+  e.target.src = default_Img;
+};
 
 function GalleryPart() {
   const [loading, setLoading] = useState(true);
@@ -39,13 +46,20 @@ function GalleryPart() {
               return (
                 <div key={element._id}>
                   <div className={styles.gallery__card}>
-                    <img src={element.img_path} alt={element.title} />
+                    <img
+                      src={element.img_path}
+                      alt={element.title}
+                      onError={onErrorImg}
+                    />
                     <div className={styles.gallery__text}>
+                      <div className={styles.gallery__icon}>
+                        {<FaCircleUser />}
+                      </div>
                       <div className={styles.gallery__text_1}>
                         {element.owner_name}
                       </div>
                       <div className={styles.gallery__text_2}>{titleOk}</div>
-                      <button>DELETE</button>
+                      <button>Delete</button>
                     </div>
                   </div>
                 </div>

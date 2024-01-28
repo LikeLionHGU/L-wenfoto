@@ -41,6 +41,11 @@
   height: 230px;
   width: 300px;
   border-radius: 12px;
+  cursor: pointer;
+}
+
+.gallery__info img:hover {
+  filter: brightness(50%);
 }
 
 .gallery__card {
@@ -49,7 +54,15 @@
 
 .gallery__text {
   display: flex;
+  align-items: center;
   padding: 8px 5px;
+}
+
+.gallery__icon {
+  font-size: 25px;
+  padding-right: 5px;
+  padding-top: 2px;
+  vertical-align: middle;
 }
 
 .gallery__text_1 {
@@ -62,15 +75,16 @@
 }
 
 .gallery__text button {
-  color: rgba(255, 255, 255, 0.8);
+  color: white;
   border: none;
   border-radius: 5px;
-  background-color: #afa89e;
+  background-color: #1c1c1c;
+  padding: 3px 5px;
   cursor: pointer;
 }
 
 .gallery__text button:hover {
-  background-color: #88847f;
+  background-color: #ff9800;
 }
 
 @media (max-width: 1318px) {
