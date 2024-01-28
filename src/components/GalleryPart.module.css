@@ -1,5 +1,7 @@
 .gallery {
   background-color: #faf4e9;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .gallery__top {
