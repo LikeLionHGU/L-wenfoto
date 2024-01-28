@@ -1,0 +1,95 @@
+.gallery {
+  background-color: #faf4e9;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.gallery__top {
+  text-align: center;
+  padding-top: 45px;
+  font-size: 30px;
+}
+
+.gallery__top h1 {
+  margin-bottom: 0;
+}
+
+.gallery__top button {
+  color: white;
+  border: none;
+  border-radius: 30px;
+  background-color: #1c1c1c;
+  padding: 15px 20px;
+  font-size: 17px;
+  font: bold;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.gallery__top button:hover {
+  background-color: #ff9800;
+}
+
+.gallery__info {
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+  padding: 60px 0px;
+}
+
+.gallery__info img {
+  height: 230px;
+  width: 300px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.gallery__info img:hover {
+  filter: brightness(50%);
+}
+
+.gallery__card {
+  margin: 20px 15px;
+}
+
+.gallery__text {
+  display: flex;
+  align-items: center;
+  padding: 8px 5px;
+}
+
+.gallery__icon {
+  font-size: 25px;
+  padding-right: 5px;
+  padding-top: 2px;
+  vertical-align: middle;
+}
+
+.gallery__text_1 {
+  padding-right: 10px;
+  flex-grow: 0.5;
+}
+
+.gallery__text_2 {
+  flex-grow: 2.5;
+}
+
+.gallery__text button {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background-color: #1c1c1c;
+  padding: 3px 5px;
+  cursor: pointer;
+}
+
+.gallery__text button:hover {
+  background-color: #ff9800;
+}
+
+@media (max-width: 1318px) {
+  .gallery__info img {
+    height: 280px;
+    width: 360px;
+  }
+}

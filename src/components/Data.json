@@ -1,0 +1,58 @@
+[
+  {
+    "albumId": 1,
+    "id": 1,
+    "title": "즐거운 월요일~해피해피해피",
+    "img": "https://cdn.pixabay.com/photo/2023/07/04/08/31/cats-8105667_1280.jpg",
+    "username": "최예라"
+  },
+  {
+    "albumId": 1,
+    "id": 2,
+    "title": "일요일에 카페에서 카공하러 나갔어유",
+    "img": "https://cdn.pixabay.com/photo/2017/08/07/22/57/coffee-2608864_1280.jpg",
+    "username": "박은주"
+  },
+  {
+    "albumId": 1,
+    "id": 3,
+    "title": "제목 길어지면 슬라이스 해줘잉",
+    "img": "https://cdn.pixabay.com/photo/2023/05/25/07/38/antarctica-8016562_1280.jpg",
+    "username": "유정섭"
+  },
+  {
+    "albumId": 1,
+    "id": 4,
+    "title": "끝나지 않은 프로젝트",
+    "img": "https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_1280.jpg",
+    "username": "임종현"
+  },
+  {
+    "albumId": 1,
+    "id": 5,
+    "title": "연습용 제목5",
+    "img": "https://cdn.pixabay.com/photo/2014/12/16/22/25/sunset-570881_1280.jpg",
+    "username": "심성환"
+  },
+  {
+    "albumId": 1,
+    "id": 6,
+    "title": "연습용 제목6",
+    "img": "https://cdn.pixabay.com/photo/2017/06/20/22/14/man-2425121_1280.jpg",
+    "username": "이한나"
+  },
+  {
+    "albumId": 1,
+    "id": 7,
+    "title": "연습용 제목7",
+    "img": "https://cdn.pixabay.com/photo/2024/01/25/07/32/train-8531161_1280.jpg",
+    "username": "김하영"
+  },
+  {
+    "albumId": 1,
+    "id": 8,
+    "title": "연습용 제목8",
+    "img": "https://cdn.pixabay.com/photo/2023/12/20/07/04/clouds-8459053_1280.jpg",
+    "username": "김하은"
+  }
+]
