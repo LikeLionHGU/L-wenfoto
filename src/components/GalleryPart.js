@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import dummy from "./Data.json";
 import styles from "./GalleryPart.module.css";
 
 function GalleryPart() {
@@ -7,7 +6,9 @@ function GalleryPart() {
   const [card, setCard] = useState([]);
 
   function getCard() {
-    setCard(dummy);
+    fetch("https://ll-api.jungsub.com/gallery/list")
+      .then((response) => response.json())
+      .then((data) => setCard(data));
     setLoading(false);
   }
 
@@ -36,12 +37,12 @@ function GalleryPart() {
                   : element.title;
 
               return (
-                <div key={element.id}>
+                <div key={element._id}>
                   <div className={styles.gallery__card}>
-                    <img src={element.img} alt={element.title} />
+                    <img src={element.img_path} alt={element.title} />
                     <div className={styles.gallery__text}>
                       <div className={styles.gallery__text_1}>
-                        {element.username}
+                        {element.owner_name}
                       </div>
                       <div className={styles.gallery__text_2}>{titleOk}</div>
                       <button>DELETE</button>
