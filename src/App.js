@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Header from "./components/Header";
+import Banner from "./components/Banner";
 
 const Div = styled.div`
   display: flex;
@@ -10,7 +12,12 @@ const Div = styled.div`
 `;
 
 function App() {
-  return <Div>Löwenfoto</Div>;
+  return (
+    <Div>
+      <Header />
+      <Banner />
+    </Div>
+  );
 }
 
 export default App;
