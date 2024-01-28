@@ -53,6 +53,7 @@ export default function DeleteDialog() {
             type="text"
             fullWidth
             variant="outlined"
+            color="warning"
           />
           <TextField
             required
@@ -63,11 +64,16 @@ export default function DeleteDialog() {
             type="text"
             fullWidth
             variant="outlined"
+            color="warning"
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>취소</Button>
-          <Button type="submit">삭제</Button>
+          <Button onClick={handleClose} color="warning">
+            취소
+          </Button>
+          <Button type="submit" color="warning">
+            삭제
+          </Button>
         </DialogActions>
       </Dialog>
     </Fragment>
