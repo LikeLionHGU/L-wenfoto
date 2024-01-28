@@ -1,17 +1,10 @@
 ## Löwenfoto 🦁
 
 |   Leehannaa   |     hwan129     |   YearaChoi   |   ejPark43  |
-|   :--------:   |    :--------:    |    :--------:  |    :--------:   |   :--------:  |
-|   <a href="https://github.com/LeeHannaa"><img src="" width="300" height="150"></a>  |  <a href="https://github.com/hwan129"><img src="" width="300" height="150"></a>    | <a href="https://github.com/YearaChoi"><img src="" width="300" height="150"></a>        | <a href="https://github.com/ejPark43"><img src="" width="300" height="150"></a>        |
+|   :--------:   |    :--------:    |    :--------:  |    :--------:   |
+|   <a href="https://github.com/LeeHannaa"><img src="https://github.com/LikeLionHGU/12th-frontend/blob/main/img/%EC%9D%B4%ED%95%9C%EB%82%98.png?raw=true" width="300" height="150"></a>  |  <a href="https://github.com/hwan129"><img src="https://github.com/LikeLionHGU/L-wenfoto/blob/master/src/img/%EC%8B%AC%EC%84%B1%ED%99%98.jpg?raw=true" width="300" height="150"></a>    | <a href="https://github.com/YearaChoi"><img src="https://github.com/LikeLionHGU/L-wenfoto/blob/master/src/img/%EC%B5%9C%EC%98%88%EB%9D%BC.jpg?raw=true" width="300" height="150"></a>        | <a href="https://github.com/ejPark43"><img src="https://github.com/LikeLionHGU/L-wenfoto/blob/master/src/img/%EB%B0%95%EC%9D%80%EC%A3%BC.jpg?raw=true" width="300" height="150"></a>        |
 
 
-#### Leehannaa
-
-#### hwan129
-
-#### YearaChoi
-
-#### ejPark43
 
 |          |                                       |                                                         |
 | -------- | ------------------------------------- | ------------------------------------------------------- |
