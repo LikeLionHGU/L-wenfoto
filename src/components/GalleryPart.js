@@ -43,11 +43,12 @@ function GalleryPart() {
                   ? `${element.title.slice(0, 12)}...`
                   : element.title;
 
+              const realImg = `https://ll-api.jungsub.com${element.img_path}`;
               return (
                 <div key={element._id}>
                   <div className={styles.gallery__card}>
                     <img
-                      src={element.img_path}
+                      src={realImg}
                       alt={element.title}
                       onError={onErrorImg}
                     />
