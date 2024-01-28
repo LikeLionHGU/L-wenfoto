@@ -1,7 +1,6 @@
 // 은주
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import dummy from "./data.json";
 
 const Div = styled.div`
   display: flex;
@@ -24,8 +23,8 @@ const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
   position: fixed; //모달 위치 fix
-  bottom: 0;
-  left: 0;
+  bottom: 0; // 모달 위치 - 바닥으로 내림
+  left: 0; // 모달 위치 - 왼쪽에 붙임
 `;
 const ModalBackgroundExit = styled.div`
   height: 5%; // 위에서 5% 떨어진 부분 클릭하면 나가짐
@@ -36,12 +35,14 @@ const ModalView = styled.div.attrs((props) => ({ role: "dialog" }))`
   width: 100%; //너비 100%
   height: 100%; //
   border-radius: 20px;
-  /* background-color: #fff9ef; */
+
   background-color: white;
+  background-color: #fff9ef;
   overflow-y: auto;
 
   > hr {
-    border-top: 1px solid black;
+    /* border-top: 1px solid black; */
+    border-top: 1px solid #ff9800;
     margin-top: 0px;
     width: 95%;
   }
@@ -49,26 +50,20 @@ const ModalView = styled.div.attrs((props) => ({ role: "dialog" }))`
 
 const ModalHeader = styled.div`
   display: flex;
-  justify-content: space-between; // responsive 하면 start로,,
+  flex-direction: column;
+  /* justify-content: space-between; // responsive 하면 start로,, */
   align-items: center;
-  padding: 40px 40px;
+  padding: 30px 30px;
   padding-bottom: 0px;
   /* border: 2px solid gray; */
-  > h1 {
+  > span {
     display: flex;
-    overflow-wrap: break-word;
-    margin: 0;
+    align-self: flex-start;
+    color: gray;
+    margin-top: 0px;
     margin-bottom: 10px;
   }
-  > h3 {
-    display: flex;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    align-self: flex-end; // 아이템 스스로가 해당 flex의 끝에 가도록 align
-    /* border: 1px solid red; */
-    font-weight: 300;
-    /* flex-direction: column; */ // responsive로...
-  }
+
   > .close-btn {
     // 나가는 버튼
     color: black;
@@ -79,9 +74,34 @@ const ModalHeader = styled.div`
     top: 5px;
     right: 0px;
     cursor: pointer;
+    transition: 0.1s;
+  }
+  > .close-btn:hover {
+    color: #ff9800;
   }
 `;
 
+const ModalTitleUser = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  > h1 {
+    justify-content: flex-start;
+    width: 70%;
+    overflow-wrap: break-word;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  > h3 {
+    align-self: flex-end; // 아이템 스스로가 해당 flex의 끝에 가도록 align
+    margin-bottom: 10px;
+    margin-left: 10px;
+
+    /* border: 1px solid red; */
+    font-weight: 300;
+    /* flex-direction: column; */ // responsive로...
+  }
+`;
 const ModalImgDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -117,41 +137,68 @@ const ModalFooter = styled.div`
 
 function ReadDialog() {
   const [modal, setModal] = useState(false);
-  //   const [posts, setPosts] = useState([]);
 
-  //   const getPosts = async () => {
-  //     const response = await fetch(`http://localhost:3000/data.json`);
-  //     const json = await response.json();
-  //     setPosts(json.dummy.posts); // API,,,,
-  //   };
-  //   useEffect(() => {
-  //     getPosts();
-  //   }, []);
+  const [posts, setPosts] = useState([]);
+
+  const getPosts = async () => {
+    const response = await fetch(`https://ll-api.jungsub.com/gallery/list`);
+    const json = await response.json();
+    setPosts(json); // API,,,,
+  };
+  console.log(posts);
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   const modalHandler = () => {
     setModal(!modal);
   };
 
-  function ShowPost({ key, title, username, text, img }) {
-    console.log("showing modal");
+  function ShowPost({ key, title, owner_name, text, img, createdAt }) {
+    // console.log("showing modal");
+    console.log(createdAt);
+    // console.log(img);
+    img = "https://ll-api.jungsub.com" + img;
+    const createdDate = createdAt.slice(0, 10);
+    console.log(createdDate);
     return (
       <Modal>
         <ModalBackground>
           <ModalBackgroundExit onClick={modalHandler}></ModalBackgroundExit>
-          <ModalView>
+          <ModalView className="modal-view">
             <ModalHeader>
+              <span>
+                <em>{createdDate}</em>
+              </span>
               <div className="close-btn" onClick={modalHandler}>
                 &times;
               </div>
-              <h1>{title}</h1>
-              <h3>{username}</h3>
+              <ModalTitleUser>
+                <h1>TEST This is a Test</h1>
+                {/* <h1>{title}</h1> */}
+                {/* <h3>{owner_name}</h3> */}
+                <h3>User_name</h3>
+              </ModalTitleUser>
             </ModalHeader>
             <hr />
             <ModalImgDiv>
               <ModalImg src={img}></ModalImg>
             </ModalImgDiv>
-
-            <ModalText>{text}</ModalText>
+            <ModalText>
+              Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni
+              dniu nitda wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi
+              lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
+              bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
+              wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka
+              ieddsdadsf eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads
+              kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla
+              viewv Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf
+              eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads kdf dkaie gi
+              lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
+              bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
+              wivth bla bla v
+            </ModalText>
+            {/* <ModalText>{text}</ModalText> */}
             <ModalFooter />
           </ModalView>
         </ModalBackground>
@@ -164,13 +211,14 @@ function ReadDialog() {
       {modal ? (
         <div className="modal">
           console.log(dummy);
-          {dummy.map((post) => (
+          {posts.map((post) => (
             <ShowPost // props를 넘겨줘서 자식 컴포넌트에서도 사용할 수 있도록 함!
-              key={post.id} // key를 가져야함...child
-              username={post.username}
+              key={post._id} // key를 가져야함...child
+              owner_name={post.owner_name}
               title={post.title}
-              img={post.img}
+              img={post.img_path}
               text={post.text}
+              createdAt={post.createdAt}
             />
           ))}
         </div>
