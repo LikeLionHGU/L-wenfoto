@@ -1,30 +1,49 @@
 // 성환
-import styled from "styled-components";
-
-const Main = styled.div`
-  background-color: #ff9800;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 20px 0px;
-
-  font-size: 15px;
-`;
-const Park = styled.div``;
-
-const Sim = styled.div``;
-const Lee = styled.div``;
-const Choi = styled.div``;
+import styles from "./Footer.module.css";
 
 function Footer() {
   return (
-    <Main>
-      <img src=".\src\logo\github.png" />
-      <Park>박은주</Park>
-      <Sim>심성환</Sim>
-      <Lee>이한나</Lee>
-      <Choi>최예라</Choi>
-    </Main>
+    <div className={styles.footer}>
+      <div className={styles.footer__logo}>이것은 로고</div>
+      <div className={styles.footer__info}>
+        <div className={styles.footer__member}>
+          <div>Members</div>
+          <div>심성환</div>
+          <div>이한나</div>
+          <div>최예라</div>
+          <div>박은주</div>
+        </div>
+        <div>
+          <div>Tasks</div>
+          <div>Header, AddDialog</div>
+          <div>Banner</div>
+          <div>GalleryPart, Footer</div>
+          <div>ReadDialog</div>
+        </div>
+        <div className={styles.footer__github}>
+          <div>Github</div>
+          <div>깃헙링크</div>
+          <div>깃헙링크</div>
+          <div>깃헙링크</div>
+          <div>깃헙링크</div>
+        </div>
+        <div className={styles.footer__insta}>
+          <div>Instagram</div>
+          <div>인스타링크</div>
+          <div>인스타링크</div>
+          <div>인스타링크</div>
+          <div>인스타링크</div>
+        </div>
+      </div>
+      <div className={styles.footer__likelion}>
+        <div>LikeLion Frontend</div>
+        <div>Learn more about us</div>
+        <div className={styles.footer__likelion_links}>
+          <div>멋사 링크</div>
+          <div>멋사 깃헙</div>
+        </div>
+      </div>
+    </div>
   );
 }
 
