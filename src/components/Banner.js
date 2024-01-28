@@ -17,6 +17,7 @@ const BannerDiv = styled.div`
   height: 35%;
   display: flex;
   flex-direction: row;
+  margin-top: 40px;
 `;
 const Card = styled.div`
   width: 250px;
