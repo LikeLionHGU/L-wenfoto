@@ -36,6 +36,14 @@
   padding-bottom: 10px;
 }
 
+.footer__csur div {
+  cursor: pointer;
+}
+
+.footer__csur div:hover {
+  color: #db7202;
+}
+
 .footer__likelion {
   padding-right: 30px;
   padding-top: 40px;
@@ -50,6 +58,11 @@
   display: flex;
   justify-content: center;
   font-size: 30px;
+  cursor: pointer;
+}
+
+.footer__likelion_links div:hover {
+  color: #db7202;
 }
 
 .footer__likelion_links div {

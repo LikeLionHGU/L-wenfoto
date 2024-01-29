@@ -5,6 +5,10 @@ import { VscHeartFilled, VscGithubInverted } from "react-icons/vsc";
 import { FaInstagram, FaCheckCircle, FaAward } from "react-icons/fa";
 
 function Footer() {
+  const handleClick = (link) => {
+    window.open(link, "_blank");
+  };
+
   return (
     <div className={styles.footer}>
       <div className={styles.footer__logo}>Löwenfoto</div>
@@ -29,35 +33,89 @@ function Footer() {
         <div className={styles.footer__blc}>
           <div>심성환</div>
           <div>Header, AddDialog</div>
-          <div>hwan129</div>
-          <div>@tlatjdghks</div>
+          <div className={styles.footer__csur}>
+            <div onClick={() => handleClick("https://github.com/hwan129")}>
+              hwan129
+            </div>
+            <div
+              onClick={() =>
+                handleClick(
+                  "https://www.instagram.com/tlatjdghks?igsh=MTlkM2dvY3c1YnhseQ=="
+                )
+              }
+            >
+              @tlatjdghks
+            </div>
+          </div>
         </div>
         <div className={styles.footer__blc}>
           <div>이한나</div>
           <div>Banner, DeleteDialog</div>
-          <div>Leehannaa</div>
-          <div>@ihan_na589</div>
+          <div className={styles.footer__csur}>
+            <div onClick={() => handleClick("https://github.com/LeeHannaa")}>
+              Leehannaa
+            </div>
+            <div
+              onClick={() =>
+                handleClick(
+                  "https://www.instagram.com/ihan_na589?igsh=NHp3Z2ZlZ3A2b2c="
+                )
+              }
+            >
+              @ihan_na589
+            </div>
+          </div>
         </div>
         <div className={styles.footer__blc}>
           <div>최예라</div>
           <div>GalleryPart, Footer</div>
-          <div>YearaChoi</div>
-          <div>@yeara_choi</div>
+          <div className={styles.footer__csur}>
+            <div onClick={() => handleClick("https://github.com/YearaChoi")}>
+              YearaChoi
+            </div>
+            <div
+              onClick={() =>
+                handleClick(
+                  "https://www.instagram.com/yeara_choi?igsh=MTQzMjVyajl6NXUwNA%3D%3D&utm_source=qr"
+                )
+              }
+            >
+              @yeara_choi
+            </div>
+          </div>
         </div>
         <div className={styles.footer__blc}>
           <div>박은주</div>
           <div>ReadDialog, Footer</div>
-          <div>ejPark43</div>
-          <div>@_silver_marble_</div>
+          <div className={styles.footer__csur}>
+            <div onClick={() => handleClick("https://github.com/ejPark43")}>
+              ejPark43
+            </div>
+            <div
+              onClick={() =>
+                handleClick(
+                  "https://www.instagram.com/_silver_marble_?igsh=MXV1eHVqaTVtZThzYw=="
+                )
+              }
+            >
+              @_silver_marble_
+            </div>
+          </div>
         </div>
       </div>
 
       <div className={styles.footer__likelion}>
         <div className={styles.footer__likelion_links}>
-          <div>
+          <div
+            onClick={() =>
+              handleClick(
+                "https://www.instagram.com/likelion.frontend/?igsh=MXhuZ3h2bDduaHk1eA%3D%3D"
+              )
+            }
+          >
             <FaInstagram />
           </div>
-          <div>
+          <div onClick={() => handleClick("https://github.com/LikeLionHGU")}>
             <VscGithubInverted />
           </div>
         </div>
