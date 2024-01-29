@@ -24,6 +24,15 @@ function GalleryPart() {
     getCard();
   }, []);
 
+  const onClickModal = () => {
+    console.log("HEEEELELLLLLOOO");
+    return (
+      <div>
+        <ReadDialog />
+      </div>
+    );
+  };
+
   return (
     <>
       <div className={styles.gallery}>
@@ -53,6 +62,7 @@ function GalleryPart() {
                         src={realImg}
                         alt={element.title}
                         onError={onErrorImg}
+                        onClick={onClickModal}
                       />
                       <div className={styles.gallery__text}>
                         <div className={styles.gallery__icon}>
@@ -62,6 +72,7 @@ function GalleryPart() {
                           {element.owner_name}
                         </div>
                         <div className={styles.gallery__text_2}>{titleOk}</div>
+
                         <button>Delete</button>
                       </div>
                     </div>

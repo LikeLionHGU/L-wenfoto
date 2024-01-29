@@ -135,70 +135,53 @@ const ModalFooter = styled.div`
   height: 40px;
 `;
 
-function ReadDialog() {
+function ReadDialog({ key, title, owner_name, text, img, createdAt }) {
   const [modal, setModal] = useState(false);
 
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
 
-  const getPosts = async () => {
-    const response = await fetch(`https://ll-api.jungsub.com/gallery/list`);
-    const json = await response.json();
-    setPosts(json); // API,,,,
-  };
-  console.log(posts);
-  useEffect(() => {
-    getPosts();
-  }, []);
+  // const getPosts = async () => {
+  //   const response = await fetch(`https://ll-api.jungsub.com/gallery/list`);
+  //   const json = await response.json();
+  //   setPosts(json); // API,,,,
+  // };
+  // console.log(posts);
+  // useEffect(() => {
+  //   getPosts();
+  // }, []);
 
   const modalHandler = () => {
     setModal(!modal);
   };
 
-  function ShowPost({ key, title, owner_name, text, img, createdAt }) {
+  function ShowPost({ key, title, owner_name, text, img }) {
     // console.log("showing modal");
-    console.log(createdAt);
-    // console.log(img);
-    img = "https://ll-api.jungsub.com" + img;
-    const createdDate = createdAt.slice(0, 10);
-    console.log(createdDate);
+    // console.log(createdAt);
+    // // console.log(img);
+    // img = "https://ll-api.jungsub.com" + img;
+    // const createdDate = createdAt.slice(0, 10);
+    // console.log(createdDate);
     return (
       <Modal>
         <ModalBackground>
           <ModalBackgroundExit onClick={modalHandler}></ModalBackgroundExit>
           <ModalView className="modal-view">
             <ModalHeader>
-              <span>
-                <em>{createdDate}</em>
-              </span>
+              <span>{/* <em>{createdDate}</em> */}</span>
               <div className="close-btn" onClick={modalHandler}>
                 &times;
               </div>
               <ModalTitleUser>
-                <h1>TEST This is a Test</h1>
-                {/* <h1>{title}</h1> */}
-                {/* <h3>{owner_name}</h3> */}
-                <h3>User_name</h3>
+                <h1>{title}</h1>
+                <h3>{owner_name}</h3>
               </ModalTitleUser>
             </ModalHeader>
             <hr />
             <ModalImgDiv>
               <ModalImg src={img}></ModalImg>
             </ModalImgDiv>
-            <ModalText>
-              Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni
-              dniu nitda wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi
-              lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
-              bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
-              wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka
-              ieddsdadsf eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads
-              kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla
-              viewv Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf
-              eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads kdf dkaie gi
-              lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
-              bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
-              wivth bla bla v
-            </ModalText>
-            {/* <ModalText>{text}</ModalText> */}
+
+            <ModalText>{text}</ModalText>
             <ModalFooter />
           </ModalView>
         </ModalBackground>
@@ -211,21 +194,17 @@ function ReadDialog() {
       {modal ? (
         <div className="modal">
           console.log(dummy);
-          {posts.map((post) => (
-            <ShowPost // props를 넘겨줘서 자식 컴포넌트에서도 사용할 수 있도록 함!
-              key={post._id} // key를 가져야함...child
-              owner_name={post.owner_name}
-              title={post.title}
-              img={post.img_path}
-              text={post.text}
-              createdAt={post.createdAt}
-            />
-          ))}
+          <ShowPost // props를 넘겨줘서 자식 컴포넌트에서도 사용할 수 있도록 함!
+            key={key} // key를 가져야함...child
+            owner_name={owner_name}
+            title={title}
+            img={img}
+            text={text}
+            // createdAt={createdAt}
+          />
         </div>
       ) : (
-        <div>
-          <button onClick={modalHandler}>MODAL</button>
-        </div>
+        <div>MODAL NOT TRUE</div>
       )}
     </div>
   );
