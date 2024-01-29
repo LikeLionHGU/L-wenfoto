@@ -1,8 +1,46 @@
 .footer {
-  background-color: aqua;
+  width: 100%;
+  height: 160px;
+  background-color: #fff3e0;
   display: flex;
+  padding-top: 20px;
+  justify-content: center;
+}
+
+.footer div {
+  /* padding-right: 30px; */
+}
+
+.footer__logo {
+  border: 3px solid blue;
+  padding-right: 10px;
 }
 
 .footer__info {
+  display: flex;
+  /* border: 3px solid red; */
+}
+
+.footer__info .footer__blc {
+  padding-left: 50px;
+  padding-right: 10px;
+  padding-top: 20px;
+  border-right: black;
+  text-align: center;
+}
+
+.footer__blc_menu {
+  text-align: left;
+}
+
+.footer__blc div {
+  padding-bottom: 10px;
+}
+
+.footer__likelion {
+  border: 3px solid green;
+}
+
+.footer__likelion_links {
   display: flex;
 }
