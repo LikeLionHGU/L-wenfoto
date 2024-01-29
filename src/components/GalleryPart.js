@@ -13,6 +13,11 @@ function GalleryPart() {
   const [loading, setLoading] = useState(true);
   const [card, setCard] = useState([]);
 
+  // ===========
+  const [isOpened, setIsOpened] = useState(false);
+
+  // ==========
+
   function getCard() {
     fetch("https://ll-api.jungsub.com/gallery/list")
       .then((response) => response.json())
@@ -24,14 +29,19 @@ function GalleryPart() {
     getCard();
   }, []);
 
-  const onClickModal = () => {
-    console.log("HEEEELELLLLLOOO");
-    return (
-      <div>
-        <ReadDialog />
-      </div>
-    );
-  };
+  // const onClickModal = () => {
+  //   console.log("HEEEELELLLLLOOO");
+  //   return (
+  //     <div>
+  //       <ReadDialog
+  //         title={element.title}
+  //         owner_name={element.owner_name}
+  //         text={element.text}
+  //         img={realImg}
+  //       />
+  //     </div>
+  //   );
+  // };
 
   return (
     <>
@@ -62,8 +72,30 @@ function GalleryPart() {
                         src={realImg}
                         alt={element.title}
                         onError={onErrorImg}
-                        onClick={onClickModal}
+                        onClick={() => {
+                          setIsOpened(true);
+                          // 이 부분에서 콘솔로 출력을 하면 해당 데이터가 잘 출력이 되는데
+                          // console.log(element.title);
+                        }}
                       />
+                      {/* 이 부분에서부터 데이터가 제대로 안 들어가는 것 같습니다 
+                      앗 이 부분은 아직 push를 안해서 
+                      네네! */}
+                      {isOpened ? (
+                        <div>
+                          <h1>it's Opened</h1>
+                          <ReadDialog
+                            title={element.title}
+                            owner_name={element.owner_name}
+                            text={element.text}
+                            img={realImg}
+                            stateChanger={setIsOpened}
+                            modalState={isOpened}
+                          />
+                        </div>
+                      ) : (
+                        <h1>it's Closed!</h1>
+                      )}
                       <div className={styles.gallery__text}>
                         <div className={styles.gallery__icon}>
                           {<FaCircleUser />}
@@ -85,7 +117,7 @@ function GalleryPart() {
       </div>
 
       {/* 다이아로그 부분 */}
-      <ReadDialog />
+      {/* <ReadDialog /> */}
     </>
   );
 }
