@@ -2,12 +2,12 @@
 import styles from "./Footer.module.css";
 import { VscHeartFilled, VscGithubInverted } from "react-icons/vsc";
 
-import { FaCheckCircle, FaAward } from "react-icons/fa";
+import { FaInstagram, FaCheckCircle, FaAward } from "react-icons/fa";
 
 function Footer() {
   return (
     <div className={styles.footer}>
-      <div className={styles.footer__logo}>이것은 로고</div>
+      <div className={styles.footer__logo}>Löwenfoto</div>
 
       <div className={styles.footer__info}>
         <div className={styles.footer__blc}>
@@ -53,12 +53,16 @@ function Footer() {
       </div>
 
       <div className={styles.footer__likelion}>
+        <div className={styles.footer__likelion_links}>
+          <div>
+            <FaInstagram />
+          </div>
+          <div>
+            <VscGithubInverted />
+          </div>
+        </div>
         <div>LikeLion Frontend</div>
         <div>Learn more about us</div>
-        <div className={styles.footer__likelion_links}>
-          <div>멋사 링크</div>
-          <div>멋사 깃헙</div>
-        </div>
       </div>
     </div>
   );
