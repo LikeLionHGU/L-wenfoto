@@ -67,7 +67,6 @@ function GalleryPart() {
                 const realImg = `https://ll-api.jungsub.com${element.img_path}`;
 
                 return (
-                  // <div key={element._id}>
                   <div key={cardId}>
                     <div className={styles.gallery__card}>
                       <img
@@ -77,7 +76,6 @@ function GalleryPart() {
                         onClick={() => handleCardClick(cardId)}
                       />
                       {isOpenedStates[cardId] ? (
-                        // {isOpened && [cardId] === element._id ? (
                         <div>
                           <h1>it's Opened</h1>
                           <ReadDialog
