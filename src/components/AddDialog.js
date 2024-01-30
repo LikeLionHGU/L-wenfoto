@@ -34,7 +34,8 @@ const ImgName = styled.input`
   width: 307px;
   padding: 4px;
   font-size: 15px;
-  background-color: #f5f5f5;
+  background-color: #fff3e0;
+
   border: 1px solid #ebebeb;
   border-radius: 0.25em;
   color: #999;
@@ -42,11 +43,12 @@ const ImgName = styled.input`
 const ImgBtn = styled.label`
   font-size: 15px;
   padding: 3px;
-  background-color: white;
+  background: #ff9800;
+  color: white;
   cursor: pointer;
-  border: 1px solid #ebebeb;
   border-radius: 0.25em;
-  border-bottom: 2px solid #ebebeb;
+  border: 1px solid #f57c00;
+  border-bottom: 3px solid #f57c00;
 `;
 const RealBtn = styled.input`
   // 화면에서 보이지 않도록 함
