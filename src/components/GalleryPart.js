@@ -13,24 +13,6 @@ function GalleryPart() {
   const [loading, setLoading] = useState(true);
   const [card, setCard] = useState([]);
 
-  // ===========
-  const [isOpenedStates, setIsOpenedStates] = useState({});
-  // 모달 여는 함수
-  const handleCardClick = (cardId) => {
-    setIsOpenedStates((prevStates) => ({
-      ...prevStates,
-      [cardId]: true,
-    }));
-  };
-  // 모달 닫는 함수
-  const handleModalClose = (cardId) => {
-    setIsOpenedStates((prevStates) => ({
-      ...prevStates,
-      [cardId]: false,
-    }));
-  };
-  // ==========
-
   function getCard() {
     fetch("https://ll-api.jungsub.com/gallery/list")
       .then((response) => response.json())
@@ -58,39 +40,20 @@ function GalleryPart() {
 
             <div className={styles.gallery__info}>
               {card.map((element) => {
-                const cardId = element._id;
                 const titleOk =
                   element.title.length > 12
                     ? `${element.title.slice(0, 12)}...`
                     : element.title;
 
                 const realImg = `https://ll-api.jungsub.com${element.img_path}`;
-
                 return (
-                  // <div key={element._id}>
-                  <div key={cardId}>
+                  <div key={element._id}>
                     <div className={styles.gallery__card}>
                       <img
                         src={realImg}
                         alt={element.title}
                         onError={onErrorImg}
-                        onClick={() => handleCardClick(cardId)}
                       />
-                      {isOpenedStates[cardId] ? (
-                        // {isOpened && [cardId] === element._id ? (
-                        <div>
-                          <h1>it's Opened</h1>
-                          <ReadDialog
-                            title={element.title}
-                            owner_name={element.owner_name}
-                            text={element.text}
-                            img={realImg}
-                            createdAt={element.createdAt}
-                            stateChanger={() => handleModalClose(cardId)}
-                            modalState={isOpenedStates[cardId]}
-                          />
-                        </div>
-                      ) : null}
                       <div className={styles.gallery__text}>
                         <div className={styles.gallery__icon}>
                           {<FaCircleUser />}
@@ -99,7 +62,6 @@ function GalleryPart() {
                           {element.owner_name}
                         </div>
                         <div className={styles.gallery__text_2}>{titleOk}</div>
-
                         <button>Delete</button>
                       </div>
                     </div>
@@ -110,6 +72,9 @@ function GalleryPart() {
           </div>
         )}
       </div>
+
+      {/* 다이아로그 부분 */}
+      <ReadDialog />
     </>
   );
 }
