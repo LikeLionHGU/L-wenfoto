@@ -2,7 +2,7 @@
 import styles from "./Footer.module.css";
 import { VscHeartFilled, VscGithubInverted } from "react-icons/vsc";
 
-import { FaInstagram, FaCheckCircle, FaAward } from "react-icons/fa";
+import { FaInstagram, FaAward } from "react-icons/fa";
 
 function Footer() {
   const handleClick = (link) => {
