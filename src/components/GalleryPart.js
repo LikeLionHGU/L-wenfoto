@@ -17,14 +17,13 @@ function GalleryPart() {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState({});
   const [pathImage, setPathImage] = useState();
-  // 모달 여는 함수
+
   const handleCardClick = (card) => {
     setIsOpen(true);
     setSelected(card);
   };
-  // 모달 닫는 함수
+
   const handleModalClose = () => {
-    // setIsOpenedStates(null);
     setIsOpen(false);
   };
   // ==========
@@ -62,7 +61,6 @@ function GalleryPart() {
             <div className={styles.gallery__info}>
               {cards?.map((card) => (
                 <div>
-                  {/* {card.title} */}
                   <div className={styles.gallery__card}>
                     <img
                       src={`https://ll-api.jungsub.com${card?.img_path}`}
