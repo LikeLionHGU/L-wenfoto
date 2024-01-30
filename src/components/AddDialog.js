@@ -4,27 +4,55 @@ import styled from "styled-components";
 import Modal from "react-modal";
 import { useEffect, useState, useRef } from "react";
 
+const Above = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const Name = styled.div``;
 const Pw = styled.div``;
 const Title = styled.div``;
-const WriteInput = styled.input`
-  label {
-    display: inline-block;
-    width: 90px;
-    height: 90px;
-    background: url("src/assets/icon-add-photo.svg") no-repeat;
-    background-position: center;
-    border: 1px solid gray;
-    border-radius: 10px;
-    cursor: pointer;
-  }
+const AboveL = styled.div``;
 
-  display: none;
+const InputImg = styled.div`
+  width: 50%;
+  height: 50%;
 `;
+const Preview = styled.div`
+  border: 1px solid gray;
+  width: 50%;
+  height: 50%;
+`;
+// const WriteInput = styled.input`
+//   label {
+//     display: inline-block;
+//     width: 90px;
+//     height: 90px;
+//     background: url("src/assets/icon-add-photo.svg") no-repeat;
+//     background-position: center;
+//     border: 1px solid gray;
+//     border-radius: 10px;
+//     cursor: pointer;
+//   }
+
+//   display: none;
+// `;
 const Content = styled.div``;
 
 function AddDialog() {
   // 이미지
+  const [file, setFile] = useState({});
+
+  const imageUpload = (e) => {
+    const imageTpye = e.target.files[0].type.includes("image");
+    const videoTpye = e.target.files[0].type.includes("video");
+
+    setFile({
+      url: URL.createObjectURL(e.target.files[0]),
+      image: imageTpye,
+      video: videoTpye,
+    });
+  };
+
   // const [postImg, setPostImg] = useState([]);
   // const [previewImg, setPreviewImg] = useState([]);
 
@@ -33,30 +61,12 @@ function AddDialog() {
   //   setPostImg(Array.from(fileArr));
 
   //   let fileRead = new FileReader();
+
   //   fileRead.onload = function () {
   //     setPreviewImg(fileRead.result);
   //   };
-
   //   fileRead.readAsDataURL(fileArr[0]);
   // }
-  // function handleFileUpload(e) {
-  //   let fileArr = e.target.files;
-  //   setPostImg(Array.from(fileArr));
-  // }
-  const [postImg, setPostImg] = useState([]);
-  const [previewImg, setPreviewImg] = useState([]);
-
-  function uploadFile(e) {
-    let fileArr = e.target.files;
-    setPostImg(Array.from(fileArr));
-
-    let fileRead = new FileReader();
-
-    fileRead.onload = function () {
-      setPreviewImg(fileRead.result);
-    };
-    fileRead.readAsDataURL(fileArr[0]);
-  }
 
   //모달
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -102,16 +112,41 @@ function AddDialog() {
           },
         }}
       >
-        <Name>
-          <input name="name" placeholder="Name" />
-        </Name>
-        <Pw>
-          <input name="password" placeholder="Password" />
-        </Pw>
-        <Title>
-          <input name="title" placeholder="Title" />
-        </Title>
-        <WriteInput
+        <Above>
+          <AboveL>
+            <Name>
+              <input
+                name="name"
+                placeholder="Name"
+                style={{ padding: "10px" }}
+              />
+            </Name>
+            <Pw>
+              <input
+                name="password"
+                placeholder="Password"
+                style={{ padding: "10px" }}
+              />
+            </Pw>
+            <Title>
+              <input
+                name="title"
+                placeholder="Title"
+                style={{ padding: "10px" }}
+              />
+            </Title>
+          </AboveL>
+          <InputImg>
+            <input type="file" onChange={imageUpload} />
+            <Preview>
+              {file.image && <img src={file.url} width="100%" height="100%" />}
+              {file.video && <video src={file.url} controls width="100%" />}
+            </Preview>
+          </InputImg>
+        </Above>
+        {/*
+        이미지
+         <WriteInput
           accept=".png, .jpeg, .jpg"
           type="file"
           onChange={uploadFile}
@@ -130,7 +165,7 @@ function AddDialog() {
               cursor: "pointer",
             }}
           />
-        )}
+        )} */}
         <Content>
           <textarea
             name="content"
