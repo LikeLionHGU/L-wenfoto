@@ -14,8 +14,21 @@ function GalleryPart() {
   const [card, setCard] = useState([]);
 
   // ===========
-  const [isOpened, setIsOpened] = useState(false);
-
+  const [isOpenedStates, setIsOpenedStates] = useState({});
+  // 모달 여는 함수
+  const handleCardClick = (cardId) => {
+    setIsOpenedStates((prevStates) => ({
+      ...prevStates,
+      [cardId]: true,
+    }));
+  };
+  // 모달 닫는 함수
+  const handleModalClose = (cardId) => {
+    setIsOpenedStates((prevStates) => ({
+      ...prevStates,
+      [cardId]: false,
+    }));
+  };
   // ==========
 
   function getCard() {
@@ -28,20 +41,6 @@ function GalleryPart() {
   useEffect(() => {
     getCard();
   }, []);
-
-  // const onClickModal = () => {
-  //   console.log("HEEEELELLLLLOOO");
-  //   return (
-  //     <div>
-  //       <ReadDialog
-  //         title={element.title}
-  //         owner_name={element.owner_name}
-  //         text={element.text}
-  //         img={realImg}
-  //       />
-  //     </div>
-  //   );
-  // };
 
   return (
     <>
@@ -59,29 +58,26 @@ function GalleryPart() {
 
             <div className={styles.gallery__info}>
               {card.map((element) => {
+                const cardId = element._id;
                 const titleOk =
                   element.title.length > 12
                     ? `${element.title.slice(0, 12)}...`
                     : element.title;
 
                 const realImg = `https://ll-api.jungsub.com${element.img_path}`;
+
                 return (
-                  <div key={element._id}>
+                  // <div key={element._id}>
+                  <div key={cardId}>
                     <div className={styles.gallery__card}>
                       <img
                         src={realImg}
                         alt={element.title}
                         onError={onErrorImg}
-                        onClick={() => {
-                          setIsOpened(true);
-                          // 이 부분에서 콘솔로 출력을 하면 해당 데이터가 잘 출력이 되는데
-                          // console.log(element.title);
-                        }}
+                        onClick={() => handleCardClick(cardId)}
                       />
-                      {/* 이 부분에서부터 데이터가 제대로 안 들어가는 것 같습니다 
-                      앗 이 부분은 아직 push를 안해서 
-                      네네! */}
-                      {isOpened ? (
+                      {isOpenedStates[cardId] ? (
+                        // {isOpened && [cardId] === element._id ? (
                         <div>
                           <h1>it's Opened</h1>
                           <ReadDialog
@@ -89,13 +85,12 @@ function GalleryPart() {
                             owner_name={element.owner_name}
                             text={element.text}
                             img={realImg}
-                            stateChanger={setIsOpened}
-                            modalState={isOpened}
+                            createdAt={element.createdAt}
+                            stateChanger={() => handleModalClose(cardId)}
+                            modalState={isOpenedStates[cardId]}
                           />
                         </div>
-                      ) : (
-                        <h1>it's Closed!</h1>
-                      )}
+                      ) : null}
                       <div className={styles.gallery__text}>
                         <div className={styles.gallery__icon}>
                           {<FaCircleUser />}
@@ -115,9 +110,6 @@ function GalleryPart() {
           </div>
         )}
       </div>
-
-      {/* 다이아로그 부분 */}
-      {/* <ReadDialog /> */}
     </>
   );
 }

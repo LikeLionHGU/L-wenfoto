@@ -142,80 +142,16 @@ function ReadDialog({
   img,
   stateChanger,
   modalState,
+  createdAt,
 }) {
-  // const [modal, setModal] = useState(false);
+  console.log(createdAt);
+  const createdDate = createdAt.slice(0, 10);
 
-  // const [posts, setPosts] = useState([]);
-
-  // const getPosts = async () => {
-  //   const response = await fetch(`https://ll-api.jungsub.com/gallery/list`);
-  //   const json = await response.json();
-  //   setPosts(json); // API,,,,
-  // };
-  // console.log(posts);
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
-
-  // const modalHandler = () => {
-  //   setModal(!modal);
-  // };
-
-  // function ShowPost({ key, createdAt }) {
-  //   // console.log("showing modal");
-  //   // console.log(createdAt);
-  //   // console.log(img);
-  //   // img = "https://ll-api.jungsub.com" + img;
-  //   // const createdDate = createdAt.slice(0, 10);
-  //   // console.log(createdDate);
-  //   console.log("It's false");
-  //   return (
-  //     <Modal>
-  //       <ModalBackground>
-  //         <ModalBackgroundExit
-  //           onClick={() => stateChanger(false)}
-  //         ></ModalBackgroundExit>
-  //         {/* <ModalBackgroundExit></ModalBackgroundExit> */}
-  //         <ModalView className="modal-view">
-  //           <ModalHeader>
-  //             <span>{/* <em>{createdDate}</em> */}</span>
-  //             {/* <div className="close-btn" onClick={setIsOpened(false)}> */}
-  //             <div className="close-btn" onClick={() => stateChanger(false)}>
-  //               &times;
-  //             </div>
-  //             <ModalTitleUser>
-  //               {/* <h1>TEST This is a Test</h1> */}
-  //               <h1>{title}</h1>
-  //               <h3>{owner_name}</h3>
-  //               {/* <h3>User_name</h3> */}
-  //             </ModalTitleUser>
-  //           </ModalHeader>
-  //           <hr />
-  //           <ModalImgDiv>
-  //             <ModalImg src={img}></ModalImg>
-  //           </ModalImgDiv>
-  //           {/* <ModalText>
-  //             Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni
-  //             dniu nitda wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi
-  //             lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
-  //             bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
-  //             wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka
-  //             ieddsdadsf eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads
-  //             kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla
-  //             viewv Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf
-  //             eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads kdf dkaie gi
-  //             lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
-  //             bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
-  //             wivth bla bla v
-  //           </ModalText> */}
-  //           <ModalText>{text}</ModalText>
-  //           <ModalFooter />
-  //         </ModalView>
-  //       </ModalBackground>
-  //     </Modal>
-  //   );
-  // }
-  console.log(title);
+  useEffect(() => {
+    document.body.style = `margin:0`;
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
   return (
     <div>
       {modalState ? (
@@ -228,7 +164,9 @@ function ReadDialog({
               {/* <ModalBackgroundExit></ModalBackgroundExit> */}
               <ModalView className="modal-view">
                 <ModalHeader>
-                  <span>{/* <em>{createdDate}</em> */}</span>
+                  <span>
+                    <em>{createdDate}</em>
+                  </span>
                   {/* <div className="close-btn" onClick={setIsOpened(false)}> */}
                   <div
                     className="close-btn"
@@ -237,30 +175,14 @@ function ReadDialog({
                     &times;
                   </div>
                   <ModalTitleUser>
-                    {/* <h1>TEST This is a Test</h1> */}
                     <h1>{title}</h1>
                     <h3>{owner_name}</h3>
-                    {/* <h3>User_name</h3> */}
                   </ModalTitleUser>
                 </ModalHeader>
                 <hr />
                 <ModalImgDiv>
                   <ModalImg src={img}></ModalImg>
                 </ModalImgDiv>
-                {/* <ModalText>
-              Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni
-              dniu nitda wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi
-              lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
-              bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
-              wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka
-              ieddsdadsf eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads
-              kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla
-              viewv Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf
-              eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads kdf dkaie gi
-              lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
-              bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
-              wivth bla bla v
-            </ModalText> */}
                 <ModalText>{text}</ModalText>
                 <ModalFooter />
               </ModalView>
@@ -275,6 +197,3 @@ function ReadDialog({
 }
 
 export default ReadDialog;
-
-// 여기서 사과 사진을 클릭하면 사과 사진을 모달에 출력해야 하는데
-// 가장 마지막에 들어있는 데이터들만 현재 나오는 상태라서
