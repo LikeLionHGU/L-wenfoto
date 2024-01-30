@@ -31,21 +31,22 @@ const Title = styled.div`
   padding-bottom: 20px;
 `;
 const ImgName = styled.input`
-  width: 317px;
+  width: 307px;
+  padding: 4px;
   font-size: 15px;
   background-color: #f5f5f5;
   border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
   border-radius: 0.25em;
+  color: #999;
 `;
 const ImgBtn = styled.label`
-  color: #999;
   font-size: 15px;
-  background-color: #fdfdfd;
+  padding: 3px;
+  background-color: white;
   cursor: pointer;
   border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
   border-radius: 0.25em;
+  border-bottom: 2px solid #ebebeb;
 `;
 const RealBtn = styled.input`
   // 화면에서 보이지 않도록 함
@@ -75,9 +76,22 @@ const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-const Send = styled.div``;
-const Cancel = styled.div`
-  padding-right: 20px;
+const Send = styled.button`
+  background: #ff9800;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 10px;
+  border: 1px solid #f57c00;
+  border-bottom: 3px solid #f57c00;
+  color: white;
+`;
+const Cancel = styled.button`
+  padding: 5px 15px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 20px;
+  border: 1px solid #c0c0c0;
+  border-bottom: 3px solid #c0c0c0;
 `;
 
 function AddDialog() {
@@ -101,6 +115,7 @@ function AddDialog() {
   const handleModal = () => {
     if (modalIsOpen) {
       file.url = undefined;
+      file.name = undefined;
     }
     setModalIsOpen(!modalIsOpen);
   };
@@ -197,12 +212,8 @@ function AddDialog() {
         </InputImg>
 
         <Buttons>
-          <Cancel>
-            <button onClick={handleModal}>취소</button>
-          </Cancel>
-          <Send>
-            <button type="submit">추가</button>
-          </Send>
+          <Cancel onClick={handleModal}>취소</Cancel>
+          <Send type="submit">추가</Send>
         </Buttons>
       </Modal>
     </>
