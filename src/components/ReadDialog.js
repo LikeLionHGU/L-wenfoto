@@ -109,16 +109,29 @@ const ModalImgDiv = styled.div`
   height: 450px; // 나중에 width만 넣어서 각 사진 비율로 모달에 넣을 수 있도록 함.
   margin: auto;
   margin-bottom: 20px; // 이미지 끼리 간격
-  width: 70%;
+  width: 60%;
   // 이미지 넣을 곳 확인용 ... //
   /* background-color: black; */
   color: white;
   border-radius: 10px;
   font-size: 50px;
+  /* background-color: black; */
+  border: 2px solid yellow;
+  > img {
+    margin-top: 20px;
+    border: 5px solid red;
+    width: 50%;
+  }
 `;
-const ModalImg = styled.img`
-  height: 100%;
-`;
+// const ModalImg = styled.img`
+//   /* height: 100%; // height, width 적용이 안되는 중... // */
+
+//   &:hover {
+//   }
+//   //GalleryPart에서 정해둔 CSS 내용이 적용되고 있음 //
+//   /* border: 5px solid red; */
+// `;
+
 const ModalText = styled.p`
   /* display: flex;
   align-items: center; */
@@ -135,17 +148,9 @@ const ModalFooter = styled.div`
   height: 40px;
 `;
 
-function ReadDialog({
-  title,
-  owner_name,
-  text,
-  img,
-  stateChanger,
-  modalState,
-  createdAt,
-}) {
-  console.log(createdAt);
-  const createdDate = createdAt.slice(0, 10);
+function ReadDialog({ open, onClose, item, pathImg }) {
+  // console.log(createdAt);
+  // const createdDate = createdAt.slice(0, 10);
 
   useEffect(() => {
     document.body.style = `margin:0`;
@@ -153,45 +158,37 @@ function ReadDialog({
     return () => (document.body.style = `overflow: auto`);
   }, []);
   return (
-    <div>
-      {modalState ? (
-        <div className="modal">
-          <Modal>
-            <ModalBackground>
-              <ModalBackgroundExit
-                onClick={() => stateChanger(false)}
-              ></ModalBackgroundExit>
-              {/* <ModalBackgroundExit></ModalBackgroundExit> */}
-              <ModalView className="modal-view">
-                <ModalHeader>
-                  <span>
-                    <em>{createdDate}</em>
-                  </span>
-                  {/* <div className="close-btn" onClick={setIsOpened(false)}> */}
-                  <div
-                    className="close-btn"
-                    onClick={() => stateChanger(false)}
-                  >
-                    &times;
-                  </div>
-                  <ModalTitleUser>
-                    <h1>{title}</h1>
-                    <h3>{owner_name}</h3>
-                  </ModalTitleUser>
-                </ModalHeader>
-                <hr />
-                <ModalImgDiv>
-                  <ModalImg src={img}></ModalImg>
-                </ModalImgDiv>
-                <ModalText>{text}</ModalText>
-                <ModalFooter />
-              </ModalView>
-            </ModalBackground>
-          </Modal>
-        </div>
-      ) : (
-        <div>NO MODAL</div>
-      )}
+    <div className="modal">
+      <Modal>
+        <ModalBackground>
+          <ModalBackgroundExit onClick={onClose}></ModalBackgroundExit>
+          {/* <ModalBackgroundExit></ModalBackgroundExit> */}
+          <ModalView className="modal-view">
+            <ModalHeader>
+              <span>
+                <em>{item.createdAt}</em>
+              </span>
+              {/* <div className="close-btn" onClick={setIsOpened(false)}> */}
+              <div className="close-btn" onClick={onClose}>
+                &times;
+              </div>
+              <ModalTitleUser>
+                <h1>{item?.title}</h1>
+                <h3>{item?.owner_name}</h3>
+              </ModalTitleUser>
+            </ModalHeader>
+            <hr />
+            <ModalImgDiv>
+              <img src={`https://ll-api.jungsub.com${item.img_path}`} />
+              {/* <ModalImg
+                src={`https://ll-api.jungsub.com${item.img_path}`}
+              ></ModalImg> */}
+            </ModalImgDiv>
+            <ModalText>{item?.text}</ModalText>
+            <ModalFooter />
+          </ModalView>
+        </ModalBackground>
+      </Modal>
     </div>
   );
 }
