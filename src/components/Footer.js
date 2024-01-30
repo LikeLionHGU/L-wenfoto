@@ -11,17 +11,16 @@ function Footer() {
 
   return (
     <div className={styles.footer}>
-      <div className={styles.footer__logo}>Löwenfoto</div>
-
       <div className={styles.footer__info}>
+        <div className={styles.footer__logo}>Löwenfoto</div>
         <div className={styles.footer__blc}>
           <div className={styles.footer__blc_menu}>
             <div>
               <FaAward /> Members
             </div>
-            <div>
+            {/* <div>
               <FaCheckCircle /> Tasks
-            </div>
+            </div> */}
             <div>
               <VscGithubInverted /> Github
             </div>
@@ -32,7 +31,7 @@ function Footer() {
         </div>
         <div className={styles.footer__blc}>
           <div>심성환</div>
-          <div>Header, AddDialog</div>
+          {/* <div>Header, AddDialog</div> */}
           <div className={styles.footer__csur}>
             <div onClick={() => handleClick("https://github.com/hwan129")}>
               hwan129
@@ -50,7 +49,7 @@ function Footer() {
         </div>
         <div className={styles.footer__blc}>
           <div>이한나</div>
-          <div>Banner, DeleteDialog</div>
+          {/* <div>Banner, DeleteDialog</div> */}
           <div className={styles.footer__csur}>
             <div onClick={() => handleClick("https://github.com/LeeHannaa")}>
               Leehannaa
@@ -68,7 +67,7 @@ function Footer() {
         </div>
         <div className={styles.footer__blc}>
           <div>최예라</div>
-          <div>GalleryPart, Footer</div>
+          {/* <div>GalleryPart, Footer</div> */}
           <div className={styles.footer__csur}>
             <div onClick={() => handleClick("https://github.com/YearaChoi")}>
               YearaChoi
@@ -86,7 +85,7 @@ function Footer() {
         </div>
         <div className={styles.footer__blc}>
           <div>박은주</div>
-          <div>ReadDialog, Footer</div>
+          {/* <div>ReadDialog, Footer</div> */}
           <div className={styles.footer__csur}>
             <div onClick={() => handleClick("https://github.com/ejPark43")}>
               ejPark43
@@ -102,25 +101,28 @@ function Footer() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className={styles.footer__likelion}>
-        <div className={styles.footer__likelion_links}>
-          <div
-            onClick={() =>
-              handleClick(
-                "https://www.instagram.com/likelion.frontend/?igsh=MXhuZ3h2bDduaHk1eA%3D%3D"
-              )
-            }
-          >
-            <FaInstagram />
+        <div className={styles.footer__likelion}>
+          <div className={styles.footer__likelion_links}>
+            <div
+              onClick={() =>
+                handleClick(
+                  "https://www.instagram.com/likelion.frontend/?igsh=MXhuZ3h2bDduaHk1eA%3D%3D"
+                )
+              }
+            >
+              <FaInstagram />
+            </div>
+            <div
+              onClick={() =>
+                handleClick("https://github.com/LikeLionHGU/L-wenfoto")
+              }
+            >
+              <VscGithubInverted />
+            </div>
           </div>
-          <div onClick={() => handleClick("https://github.com/LikeLionHGU")}>
-            <VscGithubInverted />
-          </div>
+          <div>LikeLion Frontend</div>
+          <div>Learn more about us</div>
         </div>
-        <div>LikeLion Frontend</div>
-        <div>Learn more about us</div>
       </div>
     </div>
   );
