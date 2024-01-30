@@ -5,7 +5,14 @@ import Modal from "react-modal";
 import { useEffect, useState, useRef } from "react";
 
 const Input = styled.input`
-  /* border-left-width: 0;
+  font-size: 15px;
+  border: 0;
+  border-radius: 10px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #fff3e0;
+  /* 밑줄
+  border-left-width: 0;
   border-right-width: 0;
   border-top-width: 0;
   border-bottom-width: 1; */
@@ -23,22 +30,50 @@ const Pw = styled.div`
 const Title = styled.div`
   padding-bottom: 20px;
 `;
-
+const ImgName = styled.input`
+  width: 317px;
+  font-size: 15px;
+  background-color: #f5f5f5;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: 0.25em;
+`;
+const ImgBtn = styled.label`
+  color: #999;
+  font-size: 15px;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: 0.25em;
+`;
+const RealBtn = styled.input`
+  // 화면에서 보이지 않도록 함
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+`;
 const InputImg = styled.div`
   object-fit: cover;
 `;
 const Preview = styled.div`
+  padding-top: 10px;
   width: auto;
   height: 300px;
   /* border: 1px solid gray; */
 `;
 const Content = styled.div`
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 `;
 const Buttons = styled.div`
+  padding-top: 5px;
   display: flex;
   justify-content: flex-end;
-  padding-top: 20px;
 `;
 const Send = styled.div``;
 const Cancel = styled.div`
@@ -51,14 +86,15 @@ function AddDialog() {
   const imageUpload = (e) => {
     const imageTpye = e.target.files[0].type.includes("image");
     const videoTpye = e.target.files[0].type.includes("video");
-
+    console.log(e.target.files[0].name);
     setFile({
       url: URL.createObjectURL(e.target.files[0]),
+      name: e.target.files[0].name,
       image: imageTpye,
       video: videoTpye,
     });
   };
-
+  // console.log(file.url);
   //모달
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -121,6 +157,13 @@ function AddDialog() {
             name="content"
             placeholder="Content"
             style={{
+              fontSize: "15px",
+              border: "0",
+              borderRadius: "10px",
+              outline: "none",
+              paddingLeft: "10px",
+              backgroundColor: "#FFF3E0",
+
               resize: "none",
               width: "352px",
               borderRadius: "10px",
@@ -130,9 +173,20 @@ function AddDialog() {
           />
         </Content>
         <InputImg>
-          <input type="file" onChange={imageUpload} required />
+          <ImgName
+            placeholder="파일 이름"
+            value={file.name}
+            disabled="disabled"
+          />
+          <ImgBtn htmlFor="ex_filename">업로드</ImgBtn>
+          <RealBtn
+            type="file"
+            id="ex_filename"
+            onChange={imageUpload}
+            required
+          />
           <Preview>
-            {file.image && (
+            {file.image && ( // 이미지가 존재하면 실행
               <img
                 src={file.url}
                 style={{ objectFit: "cover", maxWidth: "100%", height: "100%" }}
