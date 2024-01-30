@@ -5,6 +5,11 @@ import Modal from "react-modal";
 import { useEffect, useState, useRef } from "react";
 
 const Input = styled.input`
+  /* border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 1; */
+
   padding: 10px;
   width: 350px;
   border-radius: 10px;
@@ -43,7 +48,6 @@ const Cancel = styled.div`
 function AddDialog() {
   // 이미지
   const [file, setFile] = useState({});
-
   const imageUpload = (e) => {
     const imageTpye = e.target.files[0].type.includes("image");
     const videoTpye = e.target.files[0].type.includes("video");
@@ -59,6 +63,9 @@ function AddDialog() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleModal = () => {
+    if (modalIsOpen) {
+      file.url = undefined;
+    }
     setModalIsOpen(!modalIsOpen);
   };
 
@@ -101,10 +108,10 @@ function AddDialog() {
         }}
       >
         <Name>
-          <Input name="name" placeholder="Name" />
+          <Input name="name" placeholder="Name" required />
         </Name>
         <Pw>
-          <Input name="password" placeholder="Password" />
+          <Input name="password" placeholder="Password" required />
         </Pw>
         <Title>
           <Input name="title" placeholder="Title" />
@@ -123,7 +130,7 @@ function AddDialog() {
           />
         </Content>
         <InputImg>
-          <input type="file" onChange={imageUpload} />
+          <input type="file" onChange={imageUpload} required />
           <Preview>
             {file.image && (
               <img
