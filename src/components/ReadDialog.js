@@ -1,15 +1,6 @@
 // 은주
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-
-const Div = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-  align-items: center;
-`;
 
 const Modal = styled.div`
   /* display: flex; */
@@ -135,97 +126,62 @@ const ModalFooter = styled.div`
   height: 40px;
 `;
 
-function ReadDialog() {
-  const [modal, setModal] = useState(false);
+function ReadDialog({
+  title,
+  owner_name,
+  text,
+  img,
+  stateChanger,
+  modalState,
+  createdAt,
+}) {
+  console.log(createdAt);
+  const createdDate = createdAt.slice(0, 10);
 
-  const [posts, setPosts] = useState([]);
-
-  const getPosts = async () => {
-    const response = await fetch(`https://ll-api.jungsub.com/gallery/list`);
-    const json = await response.json();
-    setPosts(json); // API,,,,
-  };
-  console.log(posts);
   useEffect(() => {
-    getPosts();
+    document.body.style = `margin:0`;
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
   }, []);
-
-  const modalHandler = () => {
-    setModal(!modal);
-  };
-
-  function ShowPost({ key, title, owner_name, text, img, createdAt }) {
-    // console.log("showing modal");
-    console.log(createdAt);
-    // console.log(img);
-    img = "https://ll-api.jungsub.com" + img;
-    const createdDate = createdAt.slice(0, 10);
-    console.log(createdDate);
-    return (
-      <Modal>
-        <ModalBackground>
-          <ModalBackgroundExit onClick={modalHandler}></ModalBackgroundExit>
-          <ModalView className="modal-view">
-            <ModalHeader>
-              <span>
-                <em>{createdDate}</em>
-              </span>
-              <div className="close-btn" onClick={modalHandler}>
-                &times;
-              </div>
-              <ModalTitleUser>
-                <h1>TEST This is a Test</h1>
-                {/* <h1>{title}</h1> */}
-                {/* <h3>{owner_name}</h3> */}
-                <h3>User_name</h3>
-              </ModalTitleUser>
-            </ModalHeader>
-            <hr />
-            <ModalImgDiv>
-              <ModalImg src={img}></ModalImg>
-            </ModalImgDiv>
-            <ModalText>
-              Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni
-              dniu nitda wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi
-              lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
-              bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
-              wivth bla bla Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka
-              ieddsdadsf eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads
-              kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla
-              viewv Lorem Ipsum bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf
-              eni dniu nitda wivth bla bla v Lorem Ipsum bla blaads kdf dkaie gi
-              lllopdlf dka ieddsdadsf eni dniu nitda wivth bla bla Lorem Ipsum
-              bla blaads kdf dkaie gi lllopdlf dka ieddsdadsf eni dniu nitda
-              wivth bla bla v
-            </ModalText>
-            {/* <ModalText>{text}</ModalText> */}
-            <ModalFooter />
-          </ModalView>
-        </ModalBackground>
-      </Modal>
-    );
-  } // 포스트 보여줌
-
   return (
     <div>
-      {modal ? (
+      {modalState ? (
         <div className="modal">
-          console.log(dummy);
-          {posts.map((post) => (
-            <ShowPost // props를 넘겨줘서 자식 컴포넌트에서도 사용할 수 있도록 함!
-              key={post._id} // key를 가져야함...child
-              owner_name={post.owner_name}
-              title={post.title}
-              img={post.img_path}
-              text={post.text}
-              createdAt={post.createdAt}
-            />
-          ))}
+          <Modal>
+            <ModalBackground>
+              <ModalBackgroundExit
+                onClick={() => stateChanger(false)}
+              ></ModalBackgroundExit>
+              {/* <ModalBackgroundExit></ModalBackgroundExit> */}
+              <ModalView className="modal-view">
+                <ModalHeader>
+                  <span>
+                    <em>{createdDate}</em>
+                  </span>
+                  {/* <div className="close-btn" onClick={setIsOpened(false)}> */}
+                  <div
+                    className="close-btn"
+                    onClick={() => stateChanger(false)}
+                  >
+                    &times;
+                  </div>
+                  <ModalTitleUser>
+                    <h1>{title}</h1>
+                    <h3>{owner_name}</h3>
+                  </ModalTitleUser>
+                </ModalHeader>
+                <hr />
+                <ModalImgDiv>
+                  <ModalImg src={img}></ModalImg>
+                </ModalImgDiv>
+                <ModalText>{text}</ModalText>
+                <ModalFooter />
+              </ModalView>
+            </ModalBackground>
+          </Modal>
         </div>
       ) : (
-        <div>
-          <button onClick={modalHandler}>MODAL</button>
-        </div>
+        <div>NO MODAL</div>
       )}
     </div>
   );

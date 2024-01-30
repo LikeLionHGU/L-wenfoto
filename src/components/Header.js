@@ -10,7 +10,8 @@ const Main = styled.div`
   width: 100%;
   text-align: center;
   font-family: Bienchena;
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 
   @media (max-width: 500px) {
     font-size: 40px;
