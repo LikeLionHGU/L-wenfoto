@@ -169,21 +169,21 @@ function AddDialog({ open, onClick }) {
       alert("제목을 입력해주세요!");
     } else if (!file.name) {
       alert("파일을 업로드해주세요!");
+    } else {
+      await axios
+        .post("https://ll-api.jungsub.com/gallery/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log("서버 응답:", response.data);
+          onClick(); // 여기 있어야 이름 없을 때, 안넘어감
+        })
+        .catch((error) => {
+          console.error("에러 발생:", error);
+        });
     }
-
-    await axios
-      .post("https://ll-api.jungsub.com/gallery/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        console.log("서버 응답:", response.data);
-        onClick(); // 여기 있어야 이름 없을 때, 안넘어감
-      })
-      .catch((error) => {
-        console.error("에러 발생:", error);
-      });
   };
   return (
     <>
