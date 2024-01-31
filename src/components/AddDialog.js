@@ -159,7 +159,6 @@ function AddDialog() {
   // api
   const handleSubmit = async (data) => {
     // Form Data
-    console.log(data.target.value);
     const formData = new FormData();
     formData.append("owner_name", owner_name);
     formData.append("owner_pass", owner_pass);
@@ -167,11 +166,6 @@ function AddDialog() {
     formData.append("text", text);
     formData.append("file", file); // file은 이미지 파일 객체입니다.
     // setTitle(data);
-
-    console.log("Name", owner_name);
-    console.log("pw", owner_pass);
-    console.log("title", title);
-    console.log("file", file);
 
     await axios
       .post("https://ll-api.jungsub.com/gallery/upload", formData, {
@@ -185,7 +179,9 @@ function AddDialog() {
       .catch((error) => {
         console.error("에러 발생:", error);
       });
-    // data.preventDefault();
+
+    data.preventDefault();
+    handleModal();
     // return formData; // 추가된 데이터 또는 서버 응답을 반환
   };
   return (
@@ -304,7 +300,9 @@ function AddDialog() {
 
           <Buttons>
             <Cancel onClick={handleModal}>취소</Cancel>
-            <Send onClick={handleSubmit}>추가</Send>
+            <Send onClick={handleSubmit} type="submit">
+              추가
+            </Send>
           </Buttons>
         </form>
       </Modal>
