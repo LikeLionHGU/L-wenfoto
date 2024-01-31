@@ -111,7 +111,7 @@ const Cancel = styled.button`
   }
 `;
 
-function AddDialog() {
+function AddDialog({ open, onClick }) {
   // 이미지
   const [owner_name, setName] = useState();
   const [owner_pass, setPassword] = useState();
@@ -127,7 +127,6 @@ function AddDialog() {
     setPassword(e.currentTarget.value);
   };
   const handleTitle = (e) => {
-    console.log(e.currentTarget.value);
     setTitle(e.currentTarget.value);
   };
   const handleContent = (e) => {
@@ -149,23 +148,6 @@ function AddDialog() {
       });
     }
   };
-  //모달
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const handleModal = () => {
-    if (modalIsOpen) {
-      fileUrl.url = undefined;
-      fileUrl.name = undefined;
-      document.body.style.cssText = `
-      overflow: auto;
-      `;
-    } else {
-      document.body.style.cssText = `
-      overflow: hidden;
-      `;
-    }
-    setModalIsOpen(!modalIsOpen);
-  };
 
   // api
   const handleSubmit = async (data) => {
@@ -176,7 +158,7 @@ function AddDialog() {
     formData.append("title", title);
     formData.append("text", text);
     formData.append("file", file); // file은 이미지 파일 객체입니다.
-
+    data.preventDefault();
     await axios
       .post("https://ll-api.jungsub.com/gallery/upload", formData, {
         headers: {
@@ -185,20 +167,17 @@ function AddDialog() {
       })
       .then((response) => {
         console.log("서버 응답:", response.data);
-        //data.preventDefault();
-        // return formData; // 추가된 데이터 또는 서버 응답을 반환
-        // handleModal();
       })
       .catch((error) => {
         console.error("에러 발생:", error);
       });
+    onClick();
   };
   return (
     <>
-      <button onClick={handleModal}>Modal Open</button>
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={handleModal}
+        isOpen={open}
+        onRequestClose={onClick}
         ariaHideApp={false}
         style={{
           content: {
@@ -302,7 +281,6 @@ function AddDialog() {
                     width: "100%",
                     height: "100%",
                     borderRadius: "20px",
-                    // border: "3px solid #ffb74d",
                   }}
                 />
               )}
@@ -311,7 +289,7 @@ function AddDialog() {
           </InputImg>
 
           <Buttons>
-            <Cancel onClick={handleModal}>Cancel</Cancel>
+            <Cancel onClick={onClick}>Cancel</Cancel>
             <Send onClick={handleSubmit} type="submit">
               Add
             </Send>

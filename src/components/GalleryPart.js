@@ -5,6 +5,7 @@ import default_Img from "../img/default_Img.jpg";
 import { FaCircleUser } from "react-icons/fa6";
 import ReadDialog from "./ReadDialog";
 import DeleteDialog from "./DeleteDialog";
+import AddDialog from "./AddDialog";
 
 const onErrorImg = (e) => {
   e.target.src = default_Img;
@@ -26,8 +27,11 @@ function GalleryPart() {
   const handleModalClose = () => {
     setIsOpen(false);
   };
-  // ==========
-
+  // ========== Add Form
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const handleAddForm = () => {
+    setIsAddOpen(!isAddOpen);
+  };
   // ===========
   const [postId, setPostId] = useState();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -59,9 +63,7 @@ function GalleryPart() {
           <div className={styles.gallery__contianer}>
             <div className={styles.gallery__top}>
               <h1>Seize the moment</h1>
-              <button style={{ fontFamily: "TheJamsilRegular" }}>
-                Add Images
-              </button>
+              <button onClick={handleAddForm}>Add Images</button>
             </div>
 
             <div className={styles.gallery__info}>
@@ -122,6 +124,8 @@ function GalleryPart() {
           id={postId}
         />
       )}
+
+      {isAddOpen && <AddDialog open={isAddOpen} onClick={handleAddForm} />}
     </>
   );
 }
