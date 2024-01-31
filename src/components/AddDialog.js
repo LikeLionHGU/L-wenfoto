@@ -152,6 +152,13 @@ function AddDialog() {
     if (modalIsOpen) {
       fileUrl.url = undefined;
       fileUrl.name = undefined;
+      document.body.style.cssText = `
+      overflow: auto;
+      `;
+    } else {
+      document.body.style.cssText = `
+      overflow: hidden;
+      `;
     }
     setModalIsOpen(!modalIsOpen);
   };
