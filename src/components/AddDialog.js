@@ -2,8 +2,15 @@
 import * as React from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import axios from "axios";
+
+const Title = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  cursor: default;
+`;
 
 const Input = styled.input`
   font-size: 15px;
@@ -26,7 +33,7 @@ const InputText = styled.div`
   padding-bottom: 20px;
 `;
 const ImgName = styled.input`
-  width: 260px;
+  width: 259px;
   padding: 5px 10px;
   font-size: 15px;
   background-color: #fff3e0;
@@ -42,12 +49,8 @@ const ImgBtn = styled.label`
   color: white;
   cursor: pointer;
   border-radius: 0.25em;
-  border: 1px solid #f57c00;
-  border-bottom: 3px solid #f57c00;
-  &:active {
+  &:hover {
     background: #f57c00;
-    border: 1px solid #e65100;
-    border-bottom: 3px solid #e65100;
   }
 `;
 const RealBtn = styled.input`
@@ -65,10 +68,15 @@ const InputImg = styled.div`
   /* object-fit: cover; */
 `;
 const Preview = styled.div`
-  background-color: #ebebeb;
+  color: #d3d3d3;
+  background-color: #ebebeb77;
   height: 280px;
   margin-top: 20px;
   margin-bottom: 10px;
+  border-radius: 23px;
+  border-color: #ffb74d;
+  border-style: dashed;
+
   /* border: 1px solid gray; */
 `;
 const Content = styled.div`
@@ -80,30 +88,26 @@ const Buttons = styled.div`
   justify-content: flex-end;
 `;
 const Send = styled.button`
+  font-size: 17px;
   background: #ff9800;
-  padding: 5px 15px;
+  padding: 5px 18px;
   border: none;
   border-radius: 10px;
-  border: 1px solid #f57c00;
-  border-bottom: 3px solid #f57c00;
   color: white;
-  &:active {
+  cursor: pointer;
+  &:hover {
     background: #f57c00;
-    border: 1px solid #e65100;
-    border-bottom: 3px solid #e65100;
   }
 `;
 const Cancel = styled.button`
-  padding: 5px 15px;
+  font-size: 17px;
+  padding: 5px 18px;
   border: none;
   border-radius: 10px;
-  margin-right: 20px;
-  border: 1px solid #c0c0c0;
-  border-bottom: 3px solid #c0c0c0;
-  &:active {
+  margin-right: 10px;
+  cursor: pointer;
+  &:hover {
     background: #e2e2e2;
-    border: 1px solid #a9a9a9;
-    border-bottom: 3px solid #a9a9a9;
   }
 `;
 
@@ -117,7 +121,7 @@ function AddDialog() {
   const [fileUrl, setFileUrl] = useState({});
 
   const handleName = (e) => {
-    setName(e.currentTarget.value); // 빈공간으로 인한 오류
+    setName(e.currentTarget.value); // 빈공간으로 인한 오류. target을 사용하지 말자.
   };
   const handlePassword = (e) => {
     setPassword(e.currentTarget.value);
@@ -172,7 +176,6 @@ function AddDialog() {
     formData.append("title", title);
     formData.append("text", text);
     formData.append("file", file); // file은 이미지 파일 객체입니다.
-    // setTitle(data);
 
     await axios
       .post("https://ll-api.jungsub.com/gallery/upload", formData, {
@@ -207,12 +210,11 @@ function AddDialog() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            borderRadius: "20px",
+            borderRadius: "8px",
             boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
             backgroundColor: "white",
             justifyContent: "center",
-            padding: "50px",
-            // display: "flex",
+            padding: "30px",
             overflow: "hidden",
           },
           overlay: {
@@ -228,6 +230,7 @@ function AddDialog() {
           },
         }}
       >
+        <Title>새 게시물 추가하기</Title>
         <form>
           <InputText>
             <Input
@@ -235,7 +238,6 @@ function AddDialog() {
               value={owner_name}
               onChange={handleName}
               placeholder="Name"
-              // onKeyDown={handleName}
               required
             />
           </InputText>
@@ -274,19 +276,18 @@ function AddDialog() {
 
                 resize: "none",
                 width: "352px",
-                borderRadius: "10px",
                 padding: "10px",
               }}
-              rows={"10"}
+              rows={"5"}
             />
           </Content>
           <InputImg>
             <ImgName
-              placeholder="파일 이름"
+              placeholder="File Name"
               value={fileUrl.name}
               disabled="disabled"
             />
-            <ImgBtn htmlFor="ex_filename">파일 선택</ImgBtn>
+            <ImgBtn htmlFor="ex_filename">Select File</ImgBtn>
             <RealBtn
               type="file"
               id="ex_filename"
@@ -297,7 +298,12 @@ function AddDialog() {
               {fileUrl.image && ( // 이미지가 존재하면 실행
                 <img
                   src={fileUrl.url}
-                  style={{ width: "100%", height: "100%" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "20px",
+                    // border: "3px solid #ffb74d",
+                  }}
                 />
               )}
               {file.video && <video src={file.url} width="100%" />}
@@ -305,9 +311,9 @@ function AddDialog() {
           </InputImg>
 
           <Buttons>
-            <Cancel onClick={handleModal}>취소</Cancel>
+            <Cancel onClick={handleModal}>Cancel</Cancel>
             <Send onClick={handleSubmit} type="submit">
-              추가
+              Add
             </Send>
           </Buttons>
         </form>
