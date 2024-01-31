@@ -109,12 +109,26 @@ const Cancel = styled.button`
 
 function AddDialog() {
   // 이미지
-  const [title, setTitle] = useState();
-  const [text, setContent] = useState();
   const [owner_name, setName] = useState();
   const [owner_pass, setPassword] = useState();
+  const [title, setTitle] = useState("");
+  const [text, setContent] = useState();
   const [file, setFile] = useState({});
   const [fileUrl, setFileUrl] = useState({});
+
+  const handleName = (e) => {
+    setName(e.currentTarget.value); // 빈공간으로 인한 오류
+  };
+  const handlePassword = (e) => {
+    setPassword(e.currentTarget.value);
+  };
+  const handleTitle = (e) => {
+    console.log(e.currentTarget.value);
+    setTitle(e.currentTarget.value);
+  };
+  const handleContent = (e) => {
+    setContent(e.currentTarget.value);
+  };
 
   const imageUpload = (e) => {
     if (e.target.files.length !== 0) {
@@ -143,35 +157,23 @@ function AddDialog() {
   };
 
   // api
-  const addData = async (newData) => {
-    // const response = await fetch(
-    //   "https://ll-api.jungsub.com/gallery/list/upload",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       title:,
-    //       text:,
-    //       file:,
-    //       owner_name:,
-    //       owner_pass:,
-    //     }),
-    //   }
-    // );
-
+  const handleSubmit = async (data) => {
     // Form Data
+    console.log(data.target.value);
     const formData = new FormData();
     formData.append("owner_name", owner_name);
     formData.append("owner_pass", owner_pass);
     formData.append("title", title);
     formData.append("text", text);
     formData.append("file", file); // file은 이미지 파일 객체입니다.
+    // setTitle(data);
 
-    console.log(formData);
+    console.log("Name", owner_name);
+    console.log("pw", owner_pass);
+    console.log("title", title);
+    console.log("file", file);
 
-    axios
+    await axios
       .post("https://ll-api.jungsub.com/gallery/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -183,12 +185,9 @@ function AddDialog() {
       .catch((error) => {
         console.error("에러 발생:", error);
       });
-    newData.preventDefault();
-
-    // const data = await response.json();
+    // data.preventDefault();
     // return formData; // 추가된 데이터 또는 서버 응답을 반환
   };
-
   return (
     <>
       <button onClick={handleModal}>Modal Open</button>
@@ -229,24 +228,40 @@ function AddDialog() {
       >
         <form>
           <InputText>
-            <Input name="name" value={owner_name} placeholder="Name" required />
-          </InputText>
-          <InputText>
             <Input
-              name="password"
-              value={owner_pass}
-              placeholder="Password"
+              name="owner_name"
+              value={owner_name}
+              onChange={handleName}
+              placeholder="Name"
+              // onKeyDown={handleName}
               required
             />
           </InputText>
           <InputText>
-            <Input name="title" value={title} placeholder="Title" />
+            <Input
+              name="owner_pass"
+              value={owner_pass}
+              placeholder="Password"
+              type="password"
+              onChange={handlePassword}
+              required
+            />
+          </InputText>
+          <InputText>
+            <Input
+              name="title"
+              value={title}
+              placeholder="Title"
+              onChange={handleTitle}
+              required
+            />
           </InputText>
           <Content>
             <textarea
-              name="content"
+              name="text"
               placeholder="Content"
               value={text}
+              onChange={handleContent}
               style={{
                 fontSize: "15px",
                 border: "0",
@@ -289,7 +304,7 @@ function AddDialog() {
 
           <Buttons>
             <Cancel onClick={handleModal}>취소</Cancel>
-            <Send onClick={addData}>추가</Send>
+            <Send onClick={handleSubmit}>추가</Send>
           </Buttons>
         </form>
       </Modal>
