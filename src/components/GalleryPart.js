@@ -71,6 +71,7 @@ function GalleryPart() {
                     <div className={styles.gallery__text}>
                       <div className={styles.gallery__icon}>
                         {<FaCircleUser />}
+
                       </div>
                       <div className={styles.gallery__text_1}>
                         {card.owner_name}
