@@ -2,6 +2,9 @@ import { createGlobalStyle } from "styled-components";
 import Bienchenb from "../fonts/bienchen-sas/Bienchenb.ttf";
 import Bienchena from "../fonts/bienchen-sas/Bienchena.ttf";
 import Gwangyang from "../fonts/Gwangyang Touching(OTF용).otf";
+import TheJamsilThin from "../fonts/TheJamsil1Thin.ttf";
+import TheJamsilLight from "../fonts/TheJamsil2Light.ttf";
+import TheJamsilRegular from "../fonts/TheJamsil3Regular.ttf";
 
 export const GlobalStyle = createGlobalStyle`
  body, html {
@@ -40,21 +43,42 @@ export const GlobalStyle = createGlobalStyle`
     font-style: normal;
 }
 @font-face {
-    font-family: 'TheJamsil';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-family: 'TheJamsilThin';
     font-weight: 100;
     font-style: normal;
-}
+    src: url('TheJamsilThin');
+    src: url(${TheJamsilThin}) format('embedded-opentype'),
+         url(${TheJamsilThin}) format('woff2'),
+         url(${TheJamsilThin}) format('woff'),
+         url(${TheJamsilThin}) format("truetype");
+    font-display: swap;
+} 
 @font-face {
-    font-family: 'TheJamsilSemi';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-family: 'TheJamsilLight';
+    font-weight: 200;
+    font-style: normal;
+    src: url('TheJamsilLight');
+    src: url(${TheJamsilLight}) format('embedded-opentype'),
+         url(${TheJamsilLight}) format('woff2'),
+         url(${TheJamsilLight}) format('woff'),
+         url(${TheJamsilLight}) format("truetype");
+    font-display: swap;
+} 
+@font-face {
+    font-family: 'TheJamsilRegular';
     font-weight: 300;
     font-style: normal;
-}
+    src: url('TheJamsilRegular');
+    src: url(${TheJamsilRegular}) format('embedded-opentype'),
+         url(${TheJamsilRegular}) format('woff2'),
+         url(${TheJamsilRegular}) format('woff'),
+         url(${TheJamsilRegular}) format("truetype");
+    font-display: swap;
+} 
 @font-face {
     font-family: 'TheJamsilBold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
 }
 `;

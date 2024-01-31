@@ -35,9 +35,11 @@ export default function DeleteDialog({ open, onClick, id }) {
           },
         }}
       >
-        <DialogTitle>삭제하기</DialogTitle>
+        <DialogTitle style={{ fontFamily: "TheJamsilRegular" }}>
+          삭제하기
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText style={{ fontFamily: "TheJamsilLight" }}>
             갤러리를 등록한 본인의 정보를 입력해주세요. 정보를 입력 후 삭제를
             누를 시 해당 갤러리는 삭제됩니다.
           </DialogContentText>
@@ -51,6 +53,7 @@ export default function DeleteDialog({ open, onClick, id }) {
             fullWidth
             variant="outlined"
             color="warning"
+            style={{ fontFamily: "TheJamsilThin" }}
           />
           <TextField
             required
@@ -62,13 +65,22 @@ export default function DeleteDialog({ open, onClick, id }) {
             fullWidth
             variant="outlined"
             color="warning"
+            style={{ fontFamily: "TheJamsilThin" }}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClick} color="warning">
+          <Button
+            onClick={onClick}
+            color="warning"
+            style={{ fontFamily: "TheJamsilRegular" }}
+          >
             취소
           </Button>
-          <Button type="submit" color="warning">
+          <Button
+            type="submit"
+            color="warning"
+            style={{ fontFamily: "TheJamsilRegular" }}
+          >
             삭제
           </Button>
         </DialogActions>

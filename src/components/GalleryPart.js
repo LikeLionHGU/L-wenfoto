@@ -59,7 +59,9 @@ function GalleryPart() {
           <div className={styles.gallery__contianer}>
             <div className={styles.gallery__top}>
               <h1>Seize the moment</h1>
-              <button>Add Images</button>
+              <button style={{ fontFamily: "TheJamsilRegular" }}>
+                Add Images
+              </button>
             </div>
 
             <div className={styles.gallery__info}>
@@ -90,6 +92,7 @@ function GalleryPart() {
                           handleClickDelete();
                           setPostId(card._id);
                         }}
+                        style={{ fontFamily: "TheJamsilLight" }}
                       >
                         Delete
                       </button>
