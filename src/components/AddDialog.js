@@ -3,6 +3,7 @@ import * as React from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
 import { useEffect, useState, useRef } from "react";
+import axios from "axios";
 
 const Input = styled.input`
   font-size: 15px;
@@ -21,18 +22,12 @@ const Input = styled.input`
   width: 350px;
   border-radius: 10px;
 `;
-const Name = styled.div`
-  padding-bottom: 20px;
-`;
-const Pw = styled.div`
-  padding-bottom: 20px;
-`;
-const Title = styled.div`
+const InputText = styled.div`
   padding-bottom: 20px;
 `;
 const ImgName = styled.input`
-  width: 307px;
-  padding: 4px;
+  width: 260px;
+  padding: 5px 10px;
   font-size: 15px;
   background-color: #fff3e0;
 
@@ -42,13 +37,18 @@ const ImgName = styled.input`
 `;
 const ImgBtn = styled.label`
   font-size: 15px;
-  padding: 3px;
+  padding: 3px 10px;
   background: #ff9800;
   color: white;
   cursor: pointer;
   border-radius: 0.25em;
   border: 1px solid #f57c00;
   border-bottom: 3px solid #f57c00;
+  &:active {
+    background: #f57c00;
+    border: 1px solid #e65100;
+    border-bottom: 3px solid #e65100;
+  }
 `;
 const RealBtn = styled.input`
   // 화면에서 보이지 않도록 함
@@ -62,12 +62,13 @@ const RealBtn = styled.input`
   border: 0;
 `;
 const InputImg = styled.div`
-  object-fit: cover;
+  /* object-fit: cover; */
 `;
 const Preview = styled.div`
-  padding-top: 10px;
-  width: auto;
-  height: 300px;
+  background-color: #ebebeb;
+  height: 280px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   /* border: 1px solid gray; */
 `;
 const Content = styled.div`
@@ -86,6 +87,11 @@ const Send = styled.button`
   border: 1px solid #f57c00;
   border-bottom: 3px solid #f57c00;
   color: white;
+  &:active {
+    background: #f57c00;
+    border: 1px solid #e65100;
+    border-bottom: 3px solid #e65100;
+  }
 `;
 const Cancel = styled.button`
   padding: 5px 15px;
@@ -94,32 +100,93 @@ const Cancel = styled.button`
   margin-right: 20px;
   border: 1px solid #c0c0c0;
   border-bottom: 3px solid #c0c0c0;
+  &:active {
+    background: #e2e2e2;
+    border: 1px solid #a9a9a9;
+    border-bottom: 3px solid #a9a9a9;
+  }
 `;
 
 function AddDialog() {
   // 이미지
+  const [title, setTitle] = useState();
+  const [text, setContent] = useState();
+  const [owner_name, setName] = useState();
+  const [owner_pass, setPassword] = useState();
   const [file, setFile] = useState({});
+  const [fileUrl, setFileUrl] = useState({});
+
   const imageUpload = (e) => {
-    const imageTpye = e.target.files[0].type.includes("image");
-    const videoTpye = e.target.files[0].type.includes("video");
-    console.log(e.target.files[0].name);
-    setFile({
-      url: URL.createObjectURL(e.target.files[0]),
-      name: e.target.files[0].name,
-      image: imageTpye,
-      video: videoTpye,
-    });
+    if (e.target.files.length !== 0) {
+      setFile(e.target.files[0]);
+      setFileUrl(e.target.files[0]);
+      const imageTpye = e.target.files[0].type.includes("image");
+      const videoTpye = e.target.files[0].type.includes("video");
+
+      setFileUrl({
+        url: URL.createObjectURL(e.target.files[0]),
+        name: e.target.files[0].name,
+        image: imageTpye,
+        video: videoTpye, // 여기에 문제가 있는듯
+      });
+    }
   };
-  // console.log(file.url);
   //모달
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleModal = () => {
     if (modalIsOpen) {
-      file.url = undefined;
-      file.name = undefined;
+      fileUrl.url = undefined;
+      fileUrl.name = undefined;
     }
     setModalIsOpen(!modalIsOpen);
+  };
+
+  // api
+  const addData = async (newData) => {
+    // const response = await fetch(
+    //   "https://ll-api.jungsub.com/gallery/list/upload",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       title:,
+    //       text:,
+    //       file:,
+    //       owner_name:,
+    //       owner_pass:,
+    //     }),
+    //   }
+    // );
+
+    // Form Data
+    const formData = new FormData();
+    formData.append("owner_name", owner_name);
+    formData.append("owner_pass", owner_pass);
+    formData.append("title", title);
+    formData.append("text", text);
+    formData.append("file", file); // file은 이미지 파일 객체입니다.
+
+    console.log(formData);
+
+    axios
+      .post("https://ll-api.jungsub.com/gallery/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log("서버 응답:", response.data);
+      })
+      .catch((error) => {
+        console.error("에러 발생:", error);
+      });
+    newData.preventDefault();
+
+    // const data = await response.json();
+    // return formData; // 추가된 데이터 또는 서버 응답을 반환
   };
 
   return (
@@ -133,7 +200,7 @@ function AddDialog() {
           content: {
             // 모달 부분
             width: "370px",
-            height: "80%",
+            height: "730px",
             zIndex: "150",
             position: "absolute",
             top: "50%",
@@ -143,7 +210,7 @@ function AddDialog() {
             boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
             backgroundColor: "white",
             justifyContent: "center",
-            padding: "3%",
+            padding: "50px",
             // display: "flex",
             overflow: "hidden",
           },
@@ -160,63 +227,71 @@ function AddDialog() {
           },
         }}
       >
-        <Name>
-          <Input name="name" placeholder="Name" required />
-        </Name>
-        <Pw>
-          <Input name="password" placeholder="Password" required />
-        </Pw>
-        <Title>
-          <Input name="title" placeholder="Title" />
-        </Title>
-        <Content>
-          <textarea
-            name="content"
-            placeholder="Content"
-            style={{
-              fontSize: "15px",
-              border: "0",
-              borderRadius: "10px",
-              outline: "none",
-              paddingLeft: "10px",
-              backgroundColor: "#FFF3E0",
+        <form>
+          <InputText>
+            <Input name="name" value={owner_name} placeholder="Name" required />
+          </InputText>
+          <InputText>
+            <Input
+              name="password"
+              value={owner_pass}
+              placeholder="Password"
+              required
+            />
+          </InputText>
+          <InputText>
+            <Input name="title" value={title} placeholder="Title" />
+          </InputText>
+          <Content>
+            <textarea
+              name="content"
+              placeholder="Content"
+              value={text}
+              style={{
+                fontSize: "15px",
+                border: "0",
+                borderRadius: "10px",
+                outline: "none",
+                paddingLeft: "10px",
+                backgroundColor: "#FFF3E0",
 
-              resize: "none",
-              width: "352px",
-              borderRadius: "10px",
-              padding: "10px",
-            }}
-            rows={"10"}
-          />
-        </Content>
-        <InputImg>
-          <ImgName
-            placeholder="파일 이름"
-            value={file.name}
-            disabled="disabled"
-          />
-          <ImgBtn htmlFor="ex_filename">업로드</ImgBtn>
-          <RealBtn
-            type="file"
-            id="ex_filename"
-            onChange={imageUpload}
-            required
-          />
-          <Preview>
-            {file.image && ( // 이미지가 존재하면 실행
-              <img
-                src={file.url}
-                style={{ objectFit: "cover", maxWidth: "100%", height: "100%" }}
-              />
-            )}
-            {file.video && <video src={file.url} controls width="100%" />}
-          </Preview>
-        </InputImg>
+                resize: "none",
+                width: "352px",
+                borderRadius: "10px",
+                padding: "10px",
+              }}
+              rows={"10"}
+            />
+          </Content>
+          <InputImg>
+            <ImgName
+              placeholder="파일 이름"
+              value={fileUrl.name}
+              disabled="disabled"
+            />
+            <ImgBtn htmlFor="ex_filename">파일 선택</ImgBtn>
+            <RealBtn
+              type="file"
+              id="ex_filename"
+              onChange={imageUpload}
+              required
+            />
+            <Preview>
+              {fileUrl.image && ( // 이미지가 존재하면 실행
+                <img
+                  src={fileUrl.url}
+                  style={{ width: "100%", height: "100%" }}
+                />
+              )}
+              {file.video && <video src={file.url} width="100%" />}
+            </Preview>
+          </InputImg>
 
-        <Buttons>
-          <Cancel onClick={handleModal}>취소</Cancel>
-          <Send type="submit">추가</Send>
-        </Buttons>
+          <Buttons>
+            <Cancel onClick={handleModal}>취소</Cancel>
+            <Send onClick={addData}>추가</Send>
+          </Buttons>
+        </form>
       </Modal>
     </>
   );
