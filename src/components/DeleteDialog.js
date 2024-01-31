@@ -1,5 +1,5 @@
 // 한나
-import { useState, Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,34 +7,31 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import axois from "axios";
 
-export default function DeleteDialog() {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+export default function DeleteDialog({ open, onClick, id }) {
   return (
     <Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        삭제
-      </Button>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={onClick}
         PaperProps={{
           component: "form",
           onSubmit: (event) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
+            const response = axois
+              .post(`https://ll-api.jungsub.com/gallery/delete/${id}`, formJson)
+              .then((data) => {
+                console.log("응답", data.data);
+                if (data.data.error === "not found or invalid password") {
+                  alert("비밀번호가 틀렸습니다!");
+                }
+              });
             console.log(formJson);
-            handleClose();
+
+            onClick();
           },
         }}
       >
@@ -48,7 +45,7 @@ export default function DeleteDialog() {
             required
             margin="dense"
             id="name"
-            name="ownername"
+            name="owner_name"
             label="업로드한 사람 이름"
             type="text"
             fullWidth
@@ -59,7 +56,7 @@ export default function DeleteDialog() {
             required
             margin="dense"
             id="password"
-            name="ownerpassword"
+            name="owner_pass"
             label="업로드한 사람 비밀번호"
             type="text"
             fullWidth
@@ -68,7 +65,7 @@ export default function DeleteDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="warning">
+          <Button onClick={onClick} color="warning">
             취소
           </Button>
           <Button type="submit" color="warning">
