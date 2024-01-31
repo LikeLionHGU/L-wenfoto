@@ -94,6 +94,7 @@ function GalleryPart() {
                           handleClickDelete();
                           setPostId(card._id);
                         }}
+                        style={{ fontFamily: "TheJamsilLight" }}
                       >
                         Delete
                       </button>

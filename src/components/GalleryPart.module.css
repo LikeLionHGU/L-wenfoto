@@ -2,12 +2,14 @@
   background-color: #faf4e9;
   width: 100%;
   min-height: 100vh;
+  font-family: TheJamsilLight;
 }
 
 .gallery__top {
   text-align: center;
   padding-top: 45px;
   font-size: 30px;
+  font-family: TheJamsilRegular;
 }
 
 .gallery__top h1 {
