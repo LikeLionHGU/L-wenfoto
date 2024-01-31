@@ -4,6 +4,14 @@ import { VscHeartFilled, VscGithubInverted } from "react-icons/vsc";
 
 import { FaInstagram, FaAward } from "react-icons/fa";
 
+import styled from "styled-components"; //
+//
+const NameBGColor = styled.span`
+  margin: 0px;
+  text-decoration: underline 2px #ff9800;
+  text-underline-offset: 3px;
+  /* background-color: #ff980099; */
+`; //
 function Footer() {
   const handleClick = (link) => {
     window.open(link, "_blank");
@@ -30,7 +38,9 @@ function Footer() {
           </div>
         </div>
         <div className={styles.footer__blc}>
-          <div>심성환</div>
+          <div>
+            <NameBGColor>심성환</NameBGColor>
+          </div>
           {/* <div>Header, AddDialog</div> */}
           <div className={styles.footer__csur}>
             <div onClick={() => handleClick("https://github.com/hwan129")}>
@@ -48,7 +58,10 @@ function Footer() {
           </div>
         </div>
         <div className={styles.footer__blc}>
-          <div>이한나</div>
+          {/* <div>이한나</div> */}
+          <div>
+            <NameBGColor>이한나</NameBGColor>
+          </div>
           {/* <div>Banner, DeleteDialog</div> */}
           <div className={styles.footer__csur}>
             <div onClick={() => handleClick("https://github.com/LeeHannaa")}>
@@ -66,7 +79,10 @@ function Footer() {
           </div>
         </div>
         <div className={styles.footer__blc}>
-          <div>최예라</div>
+          {/* <div>최예라</div> */}
+          <div>
+            <NameBGColor>최예라</NameBGColor>
+          </div>
           {/* <div>GalleryPart, Footer</div> */}
           <div className={styles.footer__csur}>
             <div onClick={() => handleClick("https://github.com/YearaChoi")}>
@@ -84,7 +100,10 @@ function Footer() {
           </div>
         </div>
         <div className={styles.footer__blc}>
-          <div>박은주</div>
+          {/* <div>박은주</div> */}
+          <div>
+            <NameBGColor>박은주</NameBGColor>
+          </div>
           {/* <div>ReadDialog, Footer</div> */}
           <div className={styles.footer__csur}>
             <div onClick={() => handleClick("https://github.com/ejPark43")}>
