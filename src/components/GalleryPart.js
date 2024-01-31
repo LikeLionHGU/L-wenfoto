@@ -60,8 +60,8 @@ function GalleryPart() {
               {card.map((element) => {
                 const cardId = element._id;
                 const titleOk =
-                  element.title.length > 12
-                    ? `${element.title.slice(0, 12)}...`
+                  element.title.length > 10
+                    ? `${element.title.slice(0, 10)}...`
                     : element.title;
 
                 const realImg = `https://ll-api.jungsub.com${element.img_path}`;
