@@ -286,6 +286,7 @@ function AddDialog({ open, onClick }) {
               {fileUrl.image && ( // 이미지가 존재하면 실행
                 <img
                   src={fileUrl.url}
+                  alt="previewimage"
                   style={{
                     width: "100%",
                     height: "100%",

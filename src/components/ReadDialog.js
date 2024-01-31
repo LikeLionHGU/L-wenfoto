@@ -277,7 +277,10 @@ function ReadDialog({ open, onClose, item }) {
             </ModalHeader>
             <hr />
             <ModalImgDiv>
-              <img src={`https://ll-api.jungsub.com${item.img_path}`} />
+              <img
+                src={`https://ll-api.jungsub.com${item.img_path}`}
+                alt="modalimage"
+              />
             </ModalImgDiv>
             <span className="quotes">
               <FaQuoteLeft className="quote-left" size={30} />
