@@ -30,6 +30,11 @@ function GalleryPart() {
   // ========== Add Form
   const [isAddOpen, setIsAddOpen] = useState(false);
   const handleAddForm = () => {
+    if (isAddOpen) {
+      document.body.style = `overflow: auto`;
+    } else if (!isAddOpen) {
+      document.body.style = `overflow: hidden`;
+    }
     setIsAddOpen(!isAddOpen);
   };
   // ===========
