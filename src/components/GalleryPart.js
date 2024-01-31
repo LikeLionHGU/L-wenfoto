@@ -67,26 +67,48 @@ function GalleryPart() {
             </div>
 
             <div className={styles.gallery__info}>
-              {cards?.map((card) => (
-                <div>
-                  <div className={styles.gallery__card}>
-                    <img
-                      src={`https://ll-api.jungsub.com${card?.img_path}`}
-                      alt={card.title}
-                      onError={onErrorImg}
-                      onClick={() => handleCardClick(card)}
-                    />
-                    <div className={styles.gallery__text}>
-                      <div className={styles.gallery__icon}>
-                        {<FaCircleUser />}
-                      </div>
-                      <div className={styles.gallery__text_1}>
-                        {card.owner_name}
-                      </div>
-                      <div className={styles.gallery__text_2}>
-                        {card.title.length > 12
-                          ? `${card.title.slice(0, 12)}...`
-                          : card.title}
+              {card.map((element) => {
+                const cardId = element._id;
+                const titleOk =
+                  element.title.length > 10
+                    ? `${element.title.slice(0, 10)}...`
+                    : element.title;
+
+                const realImg = `https://ll-api.jungsub.com${element.img_path}`;
+
+                return (
+                  <div key={cardId}>
+                    <div className={styles.gallery__card}>
+                      <img
+                        src={realImg}
+                        alt={element.title}
+                        onError={onErrorImg}
+                        onClick={() => handleCardClick(cardId)}
+                      />
+                      {isOpenedStates[cardId] ? (
+                        <div>
+                          <h1>it's Opened</h1>
+                          <ReadDialog
+                            title={element.title}
+                            owner_name={element.owner_name}
+                            text={element.text}
+                            img={realImg}
+                            createdAt={element.createdAt}
+                            stateChanger={() => handleModalClose(cardId)}
+                            modalState={isOpenedStates[cardId]}
+                          />
+                        </div>
+                      ) : null}
+                      <div className={styles.gallery__text}>
+                        <div className={styles.gallery__icon}>
+                          {<FaCircleUser />}
+                        </div>
+                        <div className={styles.gallery__text_1}>
+                          {element.owner_name}
+                        </div>
+                        <div className={styles.gallery__text_2}>{titleOk}</div>
+
+                        <button>Delete</button>
                       </div>
 
                       <button
