@@ -63,7 +63,12 @@ function GalleryPart() {
           <div className={styles.gallery__contianer}>
             <div className={styles.gallery__top}>
               <h1>Seize the moment</h1>
-              <button onClick={handleAddForm}>Add Images</button>
+              <button
+                onClick={handleAddForm}
+                style={{ fontFamily: "TheJamsilRegular" }}
+              >
+                Add Images
+              </button>
             </div>
 
             <div className={styles.gallery__info}>

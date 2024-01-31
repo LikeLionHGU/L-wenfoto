@@ -10,6 +10,7 @@ const Title = styled.div`
   font-weight: bold;
   padding-bottom: 10px;
   cursor: default;
+  font-family: TheJamsilLight;
 `;
 
 const Input = styled.input`
@@ -28,9 +29,11 @@ const Input = styled.input`
   padding: 10px;
   width: 350px;
   border-radius: 10px;
+  font-family: TheJamsilThin;
 `;
 const InputText = styled.div`
   padding-bottom: 20px;
+  font-family: TheJamsilThin;
 `;
 const ImgName = styled.input`
   width: 259px;
@@ -41,6 +44,7 @@ const ImgName = styled.input`
   border: 1px solid #ebebeb;
   border-radius: 0.25em;
   color: #999;
+  font-family: TheJamsilThin;
 `;
 const ImgBtn = styled.label`
   font-size: 15px;
@@ -52,6 +56,7 @@ const ImgBtn = styled.label`
   &:hover {
     background: #f57c00;
   }
+  font-family: TheJamsilThin;
 `;
 const RealBtn = styled.input`
   // 화면에서 보이지 않도록 함
@@ -63,6 +68,7 @@ const RealBtn = styled.input`
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+  font-family: TheJamsilThin;
 `;
 const InputImg = styled.div`
   /* object-fit: cover; */
@@ -98,6 +104,7 @@ const Send = styled.button`
   &:hover {
     background: #f57c00;
   }
+  font-family: TheJamsilRegular;
 `;
 const Cancel = styled.button`
   font-size: 17px;
@@ -109,6 +116,7 @@ const Cancel = styled.button`
   &:hover {
     background: #e2e2e2;
   }
+  font-family: TheJamsilRegular;
 `;
 
 function AddDialog({ open, onClick }) {
@@ -256,6 +264,7 @@ function AddDialog({ open, onClick }) {
                 resize: "none",
                 width: "352px",
                 padding: "10px",
+                fontFamily: "TheJamsilThin",
               }}
               rows={"5"}
             />

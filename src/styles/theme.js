@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import Bienchenb from "../fonts/bienchen-sas/Bienchenb.ttf";
 import Bienchena from "../fonts/bienchen-sas/Bienchena.ttf";
-import Gwangyang from "../fonts/Gwangyang Touching(OTF용).otf";
+import Gwangyang from "../fonts/GwangyangTouching.otf";
 import TheJamsilThin from "../fonts/TheJamsil1Thin.ttf";
 import TheJamsilLight from "../fonts/TheJamsil2Light.ttf";
 import TheJamsilRegular from "../fonts/TheJamsil3Regular.ttf";
