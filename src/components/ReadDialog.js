@@ -2,6 +2,9 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 
+import { FaQuoteLeft } from "react-icons/fa6";
+import { FaQuoteRight } from "react-icons/fa6";
+
 const Modal = styled.div`
   display: block; // ?
   position: relative;
@@ -35,10 +38,10 @@ const ModalView = styled.div.attrs((props) => ({ role: "dialog" }))`
   z-index: 2000; // 모달의 z 축을 background보다  위로 올림
   align-self: center;
   position: fixed; // 모달 화면 고정시킴
-  position: fixed; // 모달 화면 고정시킴
+
   width: 60%; //너비 70%
   height: 85%; //
-  border-radius: 20px;
+  border-radius: 8px;
 
   background-color: #fff9ef;
   overflow-y: auto;
@@ -59,6 +62,56 @@ const ModalView = styled.div.attrs((props) => ({ role: "dialog" }))`
     // small 크기 //
     width: 80%; //너비 70%
     height: 65%;
+  }
+  > div {
+    margin-bottom: 0px;
+  }
+  > div > span {
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    justify-content: space-between;
+    color: #ff9800;
+    /* border: 2px solid red; */
+  }
+  > span {
+    display: flex;
+    justify-content: center;
+    color: #ff9800;
+  }
+  > span > hr {
+    width: 90%;
+  }
+  .quotes-hr {
+    justify-self: center;
+    align-self: center;
+    margin-left: 0px;
+    margin-right: 0px;
+
+    width: 100%;
+    border: none;
+    border-top: 1px solid #ff9800;
+  }
+  .quote-left {
+    margin-left: 20px;
+  }
+  .quote-right {
+    margin-right: 20px;
+  }
+
+  @media only screen and (max-width: 540px) {
+    // small 크기 //
+    > span > .quote-left {
+      display: none;
+    }
+    > span > .quote-right {
+      display: none;
+    }
+    > span > .quotes-hr {
+      width: 90%;
+      justify-self: center;
+      border-bottom: none;
+    }
   }
 `;
 
@@ -145,8 +198,8 @@ const ModalImgDiv = styled.div`
   height: 450; // 나중에 width만 넣어서 각 사진 비율로 모달에 넣을 수 있도록 함.
   font-size: 50px;
   margin: auto;
-  margin-bottom: 20px; // 이미지 끼리 간격
-  padding: 40px 40px;
+  /* margin-bottom: 20px; // 이미지 끼리 간격 */
+  padding: 35px 35px;
 
   > img {
     /* border-bottom: 5px solid #ff9800; */
@@ -168,18 +221,20 @@ const ModalText = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  text-align: center;
   font-size: 17px;
-  padding: 5px 20%;
-  margin-left: auto;
   color: black;
+  justify-self: center;
 
+  > span {
+    padding: 50px 70px;
+  }
   @media only screen and (max-width: 540px) {
     // small 크기 //
-
-    font-size: 20px;
-    padding: 30px 30px;
-    margin-left: auto;
+    > .modal-text {
+      font-size: 20px;
+      padding: 100px 30px;
+    }
   }
 `;
 const ModalFooter = styled.div`
@@ -221,9 +276,22 @@ function ReadDialog({ open, onClose, item }) {
             <ModalImgDiv>
               <img src={`https://ll-api.jungsub.com${item.img_path}`} />
             </ModalImgDiv>
-            <hr />
-            <ModalText>{item?.text}</ModalText>
+            <span className="quotes">
+              <FaQuoteLeft className="quote-left" size={30} />
+              <hr className="quotes-hr" />
+              <FaQuoteRight className="quote-right" size={30} />
+            </span>
+            <div>
+              {item?.text.length < 70 ? (
+                <ModalText>{item?.text}</ModalText>
+              ) : (
+                <ModalText>
+                  <span className="modal-text">{item?.text}</span>
+                </ModalText>
+              )}
+            </div>
             {item?.text ? <hr /> : null}
+
             <ModalFooter />
           </ModalView>
         </ModalBackground>
