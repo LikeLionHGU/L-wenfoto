@@ -1,5 +1,5 @@
 // 한나
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -21,7 +21,7 @@ export default function DeleteDialog({ open, onClick, id }) {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
-            const response = axois
+            axois
               .post(`https://ll-api.jungsub.com/gallery/delete/${id}`, formJson)
               .then((data) => {
                 console.log("응답", data.data);

@@ -187,7 +187,7 @@ const ModalFooter = styled.div`
   border-radius: 10px;
 `;
 
-function ReadDialog({ open, onClose, item, pathImg }) {
+function ReadDialog({ open, onClose, item }) {
   useEffect(() => {
     document.body.style = `margin:0`;
     document.body.style = `overflow: hidden`;
