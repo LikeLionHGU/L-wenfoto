@@ -118,6 +118,14 @@ const Cancel = styled.button`
   }
   font-family: TheJamsilRegular;
 `;
+const Error = styled.p`
+  font-size: 10px;
+  font-family: TheJamsilThin;
+  color: red;
+  margin: 0;
+  padding: 0;
+  margin-bottom: -10px;
+`;
 
 function AddDialog({ open, onClick }) {
   // 이미지
@@ -157,6 +165,11 @@ function AddDialog({ open, onClick }) {
     }
   };
 
+  const [nameError, setNameError] = useState("");
+  const [passError, setPassError] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [fileError, setFileError] = useState("");
+
   // api
   const handleSubmit = async (data) => {
     // Form Data
@@ -168,15 +181,30 @@ function AddDialog({ open, onClick }) {
     formData.append("file", file); // file은 이미지 파일 객체입니다.
 
     data.preventDefault();
-    console.log(file);
     if (!owner_name) {
-      alert("이름을 입력해주세요!");
-    } else if (!owner_pass) {
-      alert("비밀번호를 입력해주세요!");
-    } else if (!title) {
-      alert("제목을 입력해주세요!");
-    } else if (!file.name) {
-      alert("파일을 업로드해주세요!");
+      // 필드가 비어 있는 경우 처리
+      setNameError("이름은 필수 입력 항목입니다");
+      return;
+    } else {
+      setNameError("");
+    }
+    if (!owner_pass) {
+      setPassError("비밀번호은 필수 입력 항목입니다");
+      return;
+    } else {
+      setPassError("");
+    }
+    if (!title) {
+      setTitleError("제목은 필수 입력 항목입니다");
+      return;
+    } else {
+      setTitleError("");
+    }
+    if (!file.name) {
+      setFileError("파일은 필수 항목입니다");
+      return;
+    } else {
+      setFileError("");
     }
 
     await axios
@@ -239,6 +267,7 @@ function AddDialog({ open, onClick }) {
               placeholder="Name"
               required
             />
+            {nameError && <Error>{nameError}</Error>}
           </InputText>
           <InputText>
             <Input
@@ -249,6 +278,7 @@ function AddDialog({ open, onClick }) {
               onChange={handlePassword}
               required
             />
+            {passError && <Error>{passError}</Error>}
           </InputText>
           <InputText>
             <Input
@@ -258,6 +288,7 @@ function AddDialog({ open, onClick }) {
               onChange={handleTitle}
               required
             />
+            {titleError && <Error>{titleError}</Error>}
           </InputText>
           <Content>
             <textarea
@@ -288,6 +319,7 @@ function AddDialog({ open, onClick }) {
               disabled="disabled"
             />
             <ImgBtn htmlFor="ex_filename">Select File</ImgBtn>
+            {fileError && <Error>{fileError}</Error>}
             <RealBtn
               type="file"
               id="ex_filename"

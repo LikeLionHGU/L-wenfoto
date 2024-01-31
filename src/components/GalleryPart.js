@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./GalleryPart.module.css";
 import default_Img from "../img/default_Img.jpg";
 
@@ -40,9 +40,10 @@ function GalleryPart() {
   // ===========
   const [postId, setPostId] = useState();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const handleClickDelete = useCallback(() => {
+  const handleClickDelete = () => {
+    getCard();
     setIsDeleteOpen(!isDeleteOpen);
-  }, [isDeleteOpen]);
+  };
 
   function getCard() {
     fetch("https://ll-api.jungsub.com/gallery/list")
@@ -55,7 +56,7 @@ function GalleryPart() {
 
   useEffect(() => {
     getCard();
-  }, [handleClickDelete]);
+  }, [isDeleteOpen, isAddOpen]);
 
   return (
     <>

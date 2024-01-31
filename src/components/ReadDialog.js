@@ -196,7 +196,6 @@ const ModalImgDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* max-height: 450px; // 나중에 width만 넣어서 각 사진 비율로 모달에 넣을 수 있도록 함. */
   font-size: 50px;
   margin: auto;
   /* margin-bottom: 20px; // 이미지 끼리 간격 */
@@ -205,7 +204,7 @@ const ModalImgDiv = styled.div`
   > img {
     /* border-bottom: 5px solid #ff9800; */
     width: 80%;
-    max-height: 650px;
+    max-height: 800px;
     border-radius: 10px;
   }
   @media only screen and (max-width: 540px) {
