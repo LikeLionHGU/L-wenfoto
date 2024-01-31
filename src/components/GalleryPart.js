@@ -4,6 +4,7 @@ import default_Img from "../img/default_Img.jpg";
 
 import { FaCircleUser } from "react-icons/fa6";
 import ReadDialog from "./ReadDialog";
+import DeleteDialog from "./DeleteDialog";
 
 const onErrorImg = (e) => {
   e.target.src = default_Img;
@@ -11,36 +12,45 @@ const onErrorImg = (e) => {
 
 function GalleryPart() {
   const [loading, setLoading] = useState(true);
-  const [card, setCard] = useState([]);
+  const [cards, setCard] = useState([]);
 
   // ===========
-  const [isOpenedStates, setIsOpenedStates] = useState({});
-  // 모달 여는 함수
-  const handleCardClick = (cardId) => {
-    setIsOpenedStates((prevStates) => ({
-      ...prevStates,
-      [cardId]: true,
-    }));
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState({});
+  const [pathImage, setPathImage] = useState();
+
+  const handleCardClick = (card) => {
+    setIsOpen(true);
+    setSelected(card);
   };
-  // 모달 닫는 함수
-  const handleModalClose = (cardId) => {
-    setIsOpenedStates((prevStates) => ({
-      ...prevStates,
-      [cardId]: false,
-    }));
+
+  const handleModalClose = () => {
+    setIsOpen(false);
   };
   // ==========
+
+  // ===========
+  const [postId, setPostId] = useState();
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const handleClickDelete = (card) => {
+    setIsDeleteOpen(!isDeleteOpen);
+  };
 
   function getCard() {
     fetch("https://ll-api.jungsub.com/gallery/list")
       .then((response) => response.json())
-      .then((data) => setCard(data));
+      .then((data) => {
+        // console.log(data);
+        setCard(data);
+        // console.log(data.img_path);
+        // setPathImage(`https://ll-api.jungsub.com${data?.img_path}`);
+      });
     setLoading(false);
   }
 
   useEffect(() => {
     getCard();
-  }, []);
+  }, [handleClickDelete]);
 
   return (
     <>
@@ -100,14 +110,43 @@ function GalleryPart() {
 
                         <button>Delete</button>
                       </div>
+
+                      <button
+                        onClick={() => {
+                          handleClickDelete(card);
+                          setPostId(card._id);
+                        }}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         )}
       </div>
+
+      {isOpen && (
+        <div>
+          <h1>it's Opened</h1>
+          <ReadDialog
+            open={isOpen}
+            onClose={handleModalClose}
+            item={selected}
+            img={pathImage}
+          />
+        </div>
+      )}
+
+      {isDeleteOpen && (
+        <DeleteDialog
+          open={isDeleteOpen}
+          onClick={handleClickDelete}
+          id={postId}
+        />
+      )}
     </>
   );
 }
