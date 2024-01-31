@@ -8,13 +8,13 @@ import axios from "axios";
 const Title = styled.div`
   font-size: 25px;
   font-weight: bold;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   cursor: default;
   font-family: TheJamsilLight;
 `;
 
 const Input = styled.input`
-  font-size: 15px;
+  font-size: 13px;
   border: 0;
   border-radius: 10px;
   outline: none;
@@ -27,18 +27,19 @@ const Input = styled.input`
   border-bottom-width: 1; */
 
   padding: 10px;
-  width: 350px;
+  width: 320px;
   border-radius: 10px;
   font-family: TheJamsilThin;
 `;
 const InputText = styled.div`
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   font-family: TheJamsilThin;
 `;
 const ImgName = styled.input`
-  width: 259px;
+  width: 235px;
+  margin-right: 4px;
   padding: 5px 10px;
-  font-size: 15px;
+  font-size: 13px;
   background-color: #fff3e0;
 
   border: 1px solid #ebebeb;
@@ -47,7 +48,7 @@ const ImgName = styled.input`
   font-family: TheJamsilThin;
 `;
 const ImgBtn = styled.label`
-  font-size: 15px;
+  font-size: 13px;
   padding: 3px 10px;
   background: #ff9800;
   color: white;
@@ -76,8 +77,8 @@ const InputImg = styled.div`
 const Preview = styled.div`
   color: #d3d3d3;
   background-color: #ebebeb77;
-  height: 280px;
-  margin-top: 20px;
+  height: 250px;
+  margin-top: 15px;
   margin-bottom: 10px;
   border-radius: 23px;
   border-color: #ffb74d;
@@ -94,7 +95,7 @@ const Buttons = styled.div`
   justify-content: flex-end;
 `;
 const Send = styled.button`
-  font-size: 17px;
+  font-size: 15px;
   background: #ff9800;
   padding: 5px 18px;
   border: none;
@@ -107,7 +108,7 @@ const Send = styled.button`
   font-family: TheJamsilRegular;
 `;
 const Cancel = styled.button`
-  font-size: 17px;
+  font-size: 15px;
   padding: 5px 18px;
   border: none;
   border-radius: 10px;
@@ -119,7 +120,7 @@ const Cancel = styled.button`
   font-family: TheJamsilRegular;
 `;
 const Error = styled.p`
-  font-size: 10px;
+  font-size: 9px;
   font-family: TheJamsilThin;
   color: red;
   margin: 0;
@@ -230,8 +231,8 @@ function AddDialog({ open, onClick }) {
         style={{
           content: {
             // 모달 부분
-            width: "370px",
-            height: "730px",
+            width: "340px",
+            height: "650px",
             zIndex: "150",
             position: "absolute",
             top: "50%",
@@ -241,7 +242,7 @@ function AddDialog({ open, onClick }) {
             boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
             backgroundColor: "white",
             justifyContent: "center",
-            padding: "30px",
+            padding: "20px",
             overflow: "hidden",
           },
           overlay: {
@@ -297,7 +298,7 @@ function AddDialog({ open, onClick }) {
               value={text}
               onChange={handleContent}
               style={{
-                fontSize: "15px",
+                fontSize: "13px",
                 border: "0",
                 borderRadius: "10px",
                 outline: "none",
@@ -305,7 +306,7 @@ function AddDialog({ open, onClick }) {
                 backgroundColor: "#FFF3E0",
 
                 resize: "none",
-                width: "352px",
+                width: "322px",
                 padding: "10px",
                 fontFamily: "TheJamsilThin",
               }}
