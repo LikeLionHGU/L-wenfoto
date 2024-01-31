@@ -175,14 +175,13 @@ function AddDialog() {
       })
       .then((response) => {
         console.log("서버 응답:", response.data);
+        //data.preventDefault();
+        // return formData; // 추가된 데이터 또는 서버 응답을 반환
+        // handleModal();
       })
       .catch((error) => {
         console.error("에러 발생:", error);
       });
-
-    data.preventDefault();
-    handleModal();
-    // return formData; // 추가된 데이터 또는 서버 응답을 반환
   };
   return (
     <>
