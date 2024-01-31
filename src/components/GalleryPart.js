@@ -4,6 +4,7 @@ import default_Img from "../img/default_Img.jpg";
 
 import { FaCircleUser } from "react-icons/fa6";
 import ReadDialog from "./ReadDialog";
+import DeleteDialog from "./DeleteDialog";
 
 const onErrorImg = (e) => {
   e.target.src = default_Img;
@@ -28,13 +29,20 @@ function GalleryPart() {
   };
   // ==========
 
+  // ===========
+  const [postId, setPostId] = useState();
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const handleClickDelete = (card) => {
+    setIsDeleteOpen(!isDeleteOpen);
+  };
+
   function getCard() {
     fetch("https://ll-api.jungsub.com/gallery/list")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setCard(data);
-        console.log(data.img_path);
+        // console.log(data.img_path);
         // setPathImage(`https://ll-api.jungsub.com${data?.img_path}`);
       });
     setLoading(false);
@@ -42,7 +50,7 @@ function GalleryPart() {
 
   useEffect(() => {
     getCard();
-  }, []);
+  }, [handleClickDelete]);
 
   return (
     <>
@@ -71,7 +79,6 @@ function GalleryPart() {
                     <div className={styles.gallery__text}>
                       <div className={styles.gallery__icon}>
                         {<FaCircleUser />}
-
                       </div>
                       <div className={styles.gallery__text_1}>
                         {card.owner_name}
@@ -82,7 +89,14 @@ function GalleryPart() {
                           : card.title}
                       </div>
 
-                      <button>Delete</button>
+                      <button
+                        onClick={() => {
+                          handleClickDelete(card);
+                          setPostId(card._id);
+                        }}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -102,6 +116,14 @@ function GalleryPart() {
             img={pathImage}
           />
         </div>
+      )}
+
+      {isDeleteOpen && (
+        <DeleteDialog
+          open={isDeleteOpen}
+          onClick={handleClickDelete}
+          id={postId}
+        />
       )}
     </>
   );
