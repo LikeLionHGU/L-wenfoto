@@ -111,9 +111,7 @@ const Cancel = styled.button`
   }
 `;
 
-function AddDialog({ open, handleAddForm }) {
-  open = modalIsOpen;
-  handleAddForm = setModalIsOpen;
+function AddDialog({ open, onClick }) {
   // 이미지
   const [owner_name, setName] = useState();
   const [owner_pass, setPassword] = useState();
@@ -129,7 +127,6 @@ function AddDialog({ open, handleAddForm }) {
     setPassword(e.currentTarget.value);
   };
   const handleTitle = (e) => {
-    // console.log(e.currentTarget.value);
     setTitle(e.currentTarget.value);
   };
   const handleContent = (e) => {
@@ -151,34 +148,6 @@ function AddDialog({ open, handleAddForm }) {
       });
     }
   };
-  //모달
-  //   if (modalIsOpen) {
-  //     fileUrl.url = undefined;
-  //     fileUrl.name = undefined;
-  //     document.body.style.cssText = `
-  //       overflow: auto;
-  //       `;
-  //   } else {
-  //     document.body.style.cssText = `
-  //       overflow: hidden;
-  //       `;
-  //   }
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const handleModal = () => {
-    if (modalIsOpen) {
-      fileUrl.url = undefined;
-      fileUrl.name = undefined;
-      document.body.style.cssText = `
-        overflow: auto;
-        `;
-    } else {
-      document.body.style.cssText = `
-        overflow: hidden;
-        `;
-    }
-    setModalIsOpen(!modalIsOpen);
-  };
 
   // api
   const handleSubmit = async (data) => {
@@ -190,8 +159,6 @@ function AddDialog({ open, handleAddForm }) {
     formData.append("text", text);
     formData.append("file", file); // file은 이미지 파일 객체입니다.
     data.preventDefault();
-    // 여기 콘솔이나 data.preventDefault();를 넣으면 데이터가 간다?
-    //console.log(formData);
     await axios
       .post("https://ll-api.jungsub.com/gallery/upload", formData, {
         headers: {
@@ -200,19 +167,17 @@ function AddDialog({ open, handleAddForm }) {
       })
       .then((response) => {
         console.log("서버 응답:", response.data);
-        // return; // 추가된 데이터 또는 서버 응답을 반환
-        handleModal();
       })
       .catch((error) => {
         console.error("에러 발생:", error);
       });
+    onClick();
   };
-  //   console.log("실행");
   return (
     <>
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={setModalIsOpen}
+        isOpen={open}
+        onRequestClose={onClick}
         ariaHideApp={false}
         style={{
           content: {
@@ -316,7 +281,6 @@ function AddDialog({ open, handleAddForm }) {
                     width: "100%",
                     height: "100%",
                     borderRadius: "20px",
-                    // border: "3px solid #ffb74d",
                   }}
                 />
               )}
@@ -325,7 +289,7 @@ function AddDialog({ open, handleAddForm }) {
           </InputImg>
 
           <Buttons>
-            <Cancel onClick={setModalIsOpen}>Cancel</Cancel>
+            <Cancel onClick={onClick}>Cancel</Cancel>
             <Send onClick={handleSubmit} type="submit">
               Add
             </Send>
