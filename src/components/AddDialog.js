@@ -115,7 +115,7 @@ function AddDialog({ open, onClick }) {
   // 이미지
   const [owner_name, setName] = useState();
   const [owner_pass, setPassword] = useState();
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState();
   const [text, setContent] = useState();
   const [file, setFile] = useState({});
   const [fileUrl, setFileUrl] = useState({});
@@ -158,7 +158,19 @@ function AddDialog({ open, onClick }) {
     formData.append("title", title);
     formData.append("text", text);
     formData.append("file", file); // file은 이미지 파일 객체입니다.
+
     data.preventDefault();
+    console.log(file);
+    if (!owner_name) {
+      alert("이름을 입력해주세요!");
+    } else if (!owner_pass) {
+      alert("비밀번호를 입력해주세요!");
+    } else if (!title) {
+      alert("제목을 입력해주세요!");
+    } else if (!file.name) {
+      alert("파일을 업로드해주세요!");
+    }
+
     await axios
       .post("https://ll-api.jungsub.com/gallery/upload", formData, {
         headers: {
@@ -167,11 +179,11 @@ function AddDialog({ open, onClick }) {
       })
       .then((response) => {
         console.log("서버 응답:", response.data);
+        onClick(); // 여기 있어야 이름 없을 때, 안넘어감
       })
       .catch((error) => {
         console.error("에러 발생:", error);
       });
-    onClick();
   };
   return (
     <>
@@ -290,7 +302,7 @@ function AddDialog({ open, onClick }) {
 
           <Buttons>
             <Cancel onClick={onClick}>Cancel</Cancel>
-            <Send onClick={handleSubmit} type="submit">
+            <Send type="submit" onClick={handleSubmit}>
               Add
             </Send>
           </Buttons>
