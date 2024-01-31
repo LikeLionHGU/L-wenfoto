@@ -1,16 +1,21 @@
 // 한나
 import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import profileImg from "../img/myprofile.jpeg";
-import hannaImg from "../img/introprofile.jpeg";
-import eunjuImg from "../img/박은주.jpg";
+import hannaImg from "../img/이한나.png";
 import sunghwanImg from "../img/심성환.jpg";
+import eunjuImg from "../img/박은주.jpg";
 import yeraImg from "../img/최예라.jpg";
-import chatteamImg from "../img/chatteam.jpg";
-import cuteppImg from "../img/cutepp.jpeg";
-import frontendImg from "../img/frontend.jpg";
-import likelionImg from "../img/likelion.jpeg";
-import shadowImg from "../img/shadow.jpeg";
+import frontImg1 from "../img/front1.jpeg";
+// import frontImg2 from "../img/front2.jpeg";
+// import frontImg3 from "../img/front3.jpeg";
+import frontImg4 from "../img/front4.jpeg";
+import frontImg5 from "../img/front5.jpeg";
+// import frontImg6 from "../img/front6.jpg";
+// import frontImg7 from "../img/front7.jpeg";
+import frontImg8 from "../img/front8.jpg";
+// import frontImg9 from "../img/front9.jpeg";
+import frontImg10 from "../img/front10.jpeg";
+import frontImg11 from "../img/front11.jpeg";
 
 const BannerDiv = styled.div`
   width: 100%;
@@ -72,34 +77,49 @@ const Li = styled.li`
 
 const dummyImg = [
   {
-    img: { profileImg },
-  },
-  {
-    img: { cuteppImg },
-  },
-  {
-    img: { eunjuImg },
+    img: { hannaImg },
   },
   {
     img: { sunghwanImg },
   },
   {
-    img: { likelionImg },
+    img: { eunjuImg },
   },
   {
     img: { yeraImg },
   },
   {
-    img: { chatteamImg },
+    img: { frontImg1 },
+  },
+  // {
+  //   img: { frontImg2 },
+  // },
+  // {
+  //   img: { frontImg3 },
+  // },
+  {
+    img: { frontImg4 },
   },
   {
-    img: { hannaImg },
+    img: { frontImg5 },
+  },
+  // {
+  //   img: { frontImg6 },
+  // },
+  // {
+  //   img: { frontImg7 },
+  // },
+  {
+    img: { frontImg8 },
+  },
+  // {
+  //   img: { frontImg9 },
+  // },
+  {
+    img: { frontImg10 },
   },
   {
-    img: { frontendImg },
-  },
-  {
-    img: { shadowImg },
+    img: { frontImg11 },
   },
 ];
 function Banner() {
