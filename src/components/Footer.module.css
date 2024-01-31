@@ -6,6 +6,7 @@
   padding: 20px 0px;
   justify-content: center;
   grid-template-rows: auto 1fr auto;
+  font-family: TheJamsilRegular;
 }
 
 .footer__logo {
@@ -63,12 +64,12 @@
   padding-right: 8px;
 }
 
-@media (max-width: 1214px) and (min-width: 1093px) {
+@media (max-width: 1270px) and (min-width: 1093px) {
   .footer__logo {
     display: none;
   }
 }
-@media (max-width: 1093px) and (min-width: 906px) {
+@media (max-width: 1152px) and (min-width: 906px) {
   .footer__logo {
     display: none;
   }
@@ -78,7 +79,7 @@
   }
 }
 
-@media (max-width: 906px) and (min-width: 785px) {
+@media (max-width: 983px) and (min-width: 785px) {
   .footer__logo {
     display: none;
   }

@@ -15,7 +15,6 @@ const Modal = styled.div`
 const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
-
   width: 100%;
   height: 100%;
   position: fixed; //모달 위치 fix
@@ -154,6 +153,7 @@ const ModalTitleUser = styled.div`
   flex-direction: column;
   width: 100%;
   > div > h1 {
+    font-family: TheJamsilRegular;
     display: flex;
     justify-content: center;
     overflow-wrap: break-word;
@@ -169,6 +169,7 @@ const ModalTitleUser = styled.div`
     justify-content: end;
     align-items: center;
     color: gray;
+    font-family: TheJamsilThin;
   }
 
   > div > span > h3 {
@@ -195,7 +196,7 @@ const ModalImgDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 450; // 나중에 width만 넣어서 각 사진 비율로 모달에 넣을 수 있도록 함.
+  /* max-height: 450px; // 나중에 width만 넣어서 각 사진 비율로 모달에 넣을 수 있도록 함. */
   font-size: 50px;
   margin: auto;
   /* margin-bottom: 20px; // 이미지 끼리 간격 */
@@ -203,7 +204,8 @@ const ModalImgDiv = styled.div`
 
   > img {
     /* border-bottom: 5px solid #ff9800; */
-    width: 90%;
+    width: 80%;
+    max-height: 650px;
     border-radius: 10px;
   }
   @media only screen and (max-width: 540px) {
@@ -225,6 +227,7 @@ const ModalText = styled.p`
   font-size: 17px;
   color: black;
   justify-self: center;
+  font-family: TheJamsilLight;
 
   > span {
     padding: 50px 70px;
